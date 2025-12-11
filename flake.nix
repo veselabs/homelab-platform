@@ -42,6 +42,7 @@
                   inherit
                     (pkgs)
                     fluxcd
+                    just
                     ;
                 };
 
