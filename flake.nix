@@ -34,9 +34,16 @@
                 nix.enable = true;
               };
 
-              packages = [
-                self'.formatter
-              ];
+              packages =
+                [
+                  self'.formatter
+                ]
+                ++ builtins.attrValues {
+                  inherit
+                    (pkgs)
+                    fluxcd
+                    ;
+                };
 
               git-hooks.hooks = {
                 deadnix.enable = true;
