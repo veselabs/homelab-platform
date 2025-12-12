@@ -30,8 +30,13 @@
 
           modules = [
             {
+              env = {
+                BOOTSTRAP_PRIVATE_KEY = "op://VESELABS/homelab-platform Deploy key/password";
+              };
+
               languages = {
                 nix.enable = true;
+                shell.enable = true;
               };
 
               packages =
