@@ -30,13 +30,26 @@
 
           modules = [
             {
-              languages = {
-                nix.enable = true;
+              env = {
+                BOOTSTRAP_PRIVATE_KEY = "op://VESELABS/homelab-platform Deploy key/password";
               };
 
-              packages = [
-                self'.formatter
-              ];
+              languages = {
+                nix.enable = true;
+                shell.enable = true;
+              };
+
+              packages =
+                [
+                  self'.formatter
+                ]
+                ++ builtins.attrValues {
+                  inherit
+                    (pkgs)
+                    fluxcd
+                    just
+                    ;
+                };
 
               git-hooks.hooks = {
                 deadnix.enable = true;
