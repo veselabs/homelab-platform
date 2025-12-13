@@ -48,6 +48,7 @@
                     (pkgs)
                     fluxcd
                     just
+                    kubernetes-helm
                     ;
                 };
 

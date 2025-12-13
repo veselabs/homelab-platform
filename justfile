@@ -2,8 +2,19 @@
 default:
     @just --list
 
+# Boostrap cluster
+bootstrap: bootstrap-cilium bootstrap-flux
+
+# Bootstrap Cilium
+bootstrap-cilium:
+    helm upgrade --install \
+        cilium \
+        cilium --repo https://helm.cilium.io \
+        --namespace kube-system \
+        --wait
+
 # Boostrap Flux
-bootstrap:
+bootstrap-flux:
     #!/usr/bin/env bash
     set -euxo pipefail
     private_key_file=$(mktemp)
