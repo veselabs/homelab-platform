@@ -12,3 +12,7 @@ spec:
         kind: HelmRepository
         name: cilium
   interval: 1m0s
+  values:
+    kubeProxyReplacement: true
+    gatewayAPI:
+      enabled: true
