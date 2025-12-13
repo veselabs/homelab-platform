@@ -11,6 +11,9 @@ bootstrap-cilium:
         cilium \
         cilium --repo https://helm.cilium.io \
         --namespace kube-system \
+        --set kubeProxyReplacement=true \
+        --set k8sServiceHost=api.kubernetes.homelab.veselabs.com \
+        --set k8sServicePort=6443 \
         --wait
 
 # Boostrap Flux
