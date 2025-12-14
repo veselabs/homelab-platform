@@ -23,3 +23,8 @@ spec:
         burst: 20
     gatewayAPI:
       enabled: true
+    hubble:
+      relay:
+        enabled: true
+      ui:
+        enabled: true
