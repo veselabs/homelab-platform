@@ -12,3 +12,11 @@ spec:
         kind: HelmRepository
         name: grafana
   interval: 1m0s
+  values:
+    route:
+      main:
+        enabled: true
+        hostnames: ["grafana.homelab.veselabs.com"]
+        parentRefs:
+          - name: gateway
+            namespace: kube-system
