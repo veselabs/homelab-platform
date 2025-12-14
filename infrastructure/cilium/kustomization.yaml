@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: kube-system
 resources:
   - ./gateway.yaml
+  - ./httproute.yaml
   - ./ippool.yaml
   - ./policy.yaml
   - ./release.yaml
