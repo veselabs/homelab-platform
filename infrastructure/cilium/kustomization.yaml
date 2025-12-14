@@ -5,5 +5,6 @@ namespace: kube-system
 resources:
   - ./gateway.yaml
   - ./ippool.yaml
+  - ./policy.yaml
   - ./release.yaml
   - ./repository.yaml
