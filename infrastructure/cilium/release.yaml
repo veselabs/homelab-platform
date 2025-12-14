@@ -16,10 +16,5 @@ spec:
     kubeProxyReplacement: true
     k8sServiceHost: api.kubernetes.homelab.veselabs.com
     k8sServicePort: 6443
-    l2announcements:
-      enabled: true
-      k8sClientRateLimit:
-        qps: 10
-        burst: 20
     gatewayAPI:
       enabled: true
