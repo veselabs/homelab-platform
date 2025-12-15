@@ -22,6 +22,7 @@
 
           programs = {
             alejandra.enable = true;
+            prettier.enable = true;
           };
         };
       in {
