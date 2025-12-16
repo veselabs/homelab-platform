@@ -1,0 +1,25 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: 1password
+spec:
+  chart:
+    spec:
+      chart: connect
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: 1password
+  interval: 1m0s
+  values:
+    operator:
+      create: true
+      authMethod: service-account
+    connect:
+      create: false
+  valuesFrom:
+    - kind: Secret
+      name: 1password-token
+      targetPath: operator.serviceAccountToken.value
+      valuesKey: credential

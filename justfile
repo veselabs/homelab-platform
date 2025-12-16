@@ -3,7 +3,7 @@ default:
     @just --list
 
 # Boostrap cluster
-bootstrap: bootstrap-cilium bootstrap-flux
+bootstrap: bootstrap-cilium bootstrap-1password bootstrap-flux
 
 # Bootstrap Cilium
 bootstrap-cilium:
@@ -15,6 +15,14 @@ bootstrap-cilium:
         --set k8sServiceHost=api.kubernetes.homelab.veselabs.com \
         --set k8sServicePort=6443 \
         --wait
+
+# Bootstrap 1Password
+bootstrap-1password:
+    kubectl create namespace 1password
+    kubectl create secret generic \
+        1password-token \
+        --namespace 1password \
+        --from-literal credential=${ONEPASSWORD_TOKEN}
 
 # Boostrap Flux
 bootstrap-flux:
