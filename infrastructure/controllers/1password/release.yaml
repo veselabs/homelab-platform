@@ -6,6 +6,7 @@ metadata:
 spec:
   chart:
     spec:
+      version: 2.1.1
       chart: connect
       reconcileStrategy: ChartVersion
       sourceRef:
