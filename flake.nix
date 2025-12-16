@@ -32,7 +32,8 @@
           modules = [
             {
               env = {
-                BOOTSTRAP_PRIVATE_KEY = "op://VESELABS/homelab-platform Deploy key/password";
+                BOOTSTRAP_PRIVATE_KEY = "op://veselabs/homelab-platform deploy key/password";
+                ONEPASSWORD_TOKEN = "op://veselabs/service account auth token/credential";
               };
 
               languages = {
