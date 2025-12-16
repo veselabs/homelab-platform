@@ -26,5 +26,12 @@ spec:
     hubble:
       relay:
         enabled: true
+        rollOutPods: true
       ui:
         enabled: true
+      rollOutPods: true
+    envoy:
+      rollOutPods: true
+    operator:
+      rollOutPods: true
+    rollOutCiliumPods: true
