@@ -4,6 +4,3 @@ kind: Kustomization
 namespace: 1password
 resources:
   - ./1password.yaml
-  - ./namespace.yaml
-  - ./release.yaml
-  - ./repository.yaml
