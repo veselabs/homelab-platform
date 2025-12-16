@@ -6,6 +6,7 @@ metadata:
 spec:
   chart:
     spec:
+      version: 1.18.4
       chart: cilium
       reconcileStrategy: ChartVersion
       sourceRef:

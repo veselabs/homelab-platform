@@ -6,6 +6,7 @@ metadata:
 spec:
   chart:
     spec:
+      version: 10.3.1
       chart: grafana
       reconcileStrategy: ChartVersion
       sourceRef:
