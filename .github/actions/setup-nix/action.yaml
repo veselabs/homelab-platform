@@ -1,3 +1,4 @@
+---
 name: Setup Nix
 description: Sets up Nix environment with store caching
 runs:
