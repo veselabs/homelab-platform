@@ -4,5 +4,6 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ./grafana.yaml
+  - ./mimir.yaml
   - ./namespace.yaml
   - ./repository.yaml
