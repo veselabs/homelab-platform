@@ -5,6 +5,7 @@ namespace: monitoring
 resources:
   - ./alloy.yaml
   - ./grafana.yaml
+  - ./loki.yaml
   - ./mimir.yaml
   - ./namespace.yaml
   - ./repository.yaml
