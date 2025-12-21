@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ./alloy.yaml
+  - ./exporters
   - ./grafana.yaml
   - ./loki.yaml
   - ./mimir.yaml
