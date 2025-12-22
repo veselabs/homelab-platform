@@ -27,6 +27,16 @@ spec:
             }
           }
 
+          loki.write "loki" {
+            endpoint {
+              url = "http://loki-gateway.monitoring.svc.cluster.local:80/loki/api/v1/push"
+
+              headers = {
+                "X-Scope-OrgID" = "homelab",
+              }
+            }
+          }
+
           import.git "node_exporter" {
             repository     = "https://github.com/grafana/alloy-modules.git"
             revision       = "v0.2.11"
