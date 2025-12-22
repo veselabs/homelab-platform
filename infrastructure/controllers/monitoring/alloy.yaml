@@ -34,3 +34,18 @@ spec:
             targets    = prometheus.exporter.unix.default.targets
             forward_to = [prometheus.remote_write.mimir.receiver]
           }
+
+          import.git "ksm" {
+            repository     = "https://github.com/grafana/alloy-modules.git"
+            revision       = "v0.2.11"
+            path           = "modules/kubernetes/kube-state-metrics/metrics.alloy"
+            pull_frequency = "0s"
+          }
+
+          ksm.kubernetes "targets" {
+          }
+
+          ksm.scrape "metrics" {
+            targets    = ksm.kubernetes.targets.output
+            forward_to = [prometheus.remote_write.mimir.receiver]
+          }
