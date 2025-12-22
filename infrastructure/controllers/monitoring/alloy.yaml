@@ -27,11 +27,18 @@ spec:
             }
           }
 
-          prometheus.exporter.unix "default" {
+          import.git "node_exporter" {
+            repository     = "https://github.com/grafana/alloy-modules.git"
+            revision       = "v0.2.11"
+            path           = "modules/system/node-exporter/metrics.alloy"
+            pull_frequency = "0s"
           }
 
-          prometheus.scrape "node_exporter" {
-            targets    = prometheus.exporter.unix.default.targets
+          node_exporter.kubernetes "targets" {
+          }
+
+          node_exporter.scrape "metrics" {
+            targets = node_exporter.kubernetes.targets.output
             forward_to = [prometheus.remote_write.mimir.receiver]
           }
 
