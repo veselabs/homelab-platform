@@ -26,3 +26,11 @@ spec:
               }
             }
           }
+
+          prometheus.exporter.unix "default" {
+          }
+
+          prometheus.scrape "node_exporter" {
+            targets    = prometheus.exporter.unix.default.targets
+            forward_to = [prometheus.remote_write.default.receiver]
+          }
