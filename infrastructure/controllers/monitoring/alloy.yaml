@@ -50,7 +50,7 @@ spec:
           }
 
           node_exporter.scrape "metrics" {
-            targets = node_exporter.kubernetes.targets.output
+            targets    = node_exporter.kubernetes.targets.output
             forward_to = [prometheus.remote_write.mimir.receiver]
           }
 
@@ -69,6 +69,18 @@ spec:
             forward_to = [prometheus.remote_write.mimir.receiver]
           }
 
+          import.git "k8s" {
+            repository     = "https://github.com/grafana/alloy-modules.git"
+            revision       = "v0.2.11"
+            path           = "modules/kubernetes/core/metrics.alloy"
+            pull_frequency = "0s"
+          }
+
+          k8s.cadvisor "scrape" {
+            field_selectors = ["metadata.name=" + coalesce(sys.env("HOSTNAME"), constants.hostname)]
+            forward_to      = [prometheus.remote_write.mimir.receiver]
+          }
+
           loki.source.journal "all" {
             path       = "/var/log/journal"
             forward_to = [loki.write.loki.receiver]
@@ -78,7 +90,7 @@ spec:
             role = "pod"
 
             selectors {
-              role = "pod"
+              role  = "pod"
               field = "spec.nodeName=" + coalesce(sys.env("HOSTNAME"), constants.hostname)
             }
           }
