@@ -98,11 +98,19 @@ spec:
 
           loki.source.kubernetes "pods" {
             targets    = discovery.kubernetes.pods.targets
-            labels     = {job = "integrations/kubernetes/pods"}
-            forward_to = [loki.write.loki.receiver]
+            forward_to = [loki.process.pods.receiver]
           }
 
+          loki.process "pods" {
+            forward_to = [loki.write.loki.receiver]
+
+            stage.static_labels {
+              values = {job = "integrations/kubernetes/pods"}
+            }
+          }
+
+
           loki.source.kubernetes_events "cluster" {
-            labels     = {job = "integrations/kubernetes/events"}
+            job_name   = "integrations/kubernetes/events"
             forward_to = [loki.write.loki.receiver]
           }
