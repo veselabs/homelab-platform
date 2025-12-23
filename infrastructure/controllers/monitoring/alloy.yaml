@@ -109,7 +109,6 @@ spec:
             }
           }
 
-
           loki.source.kubernetes_events "cluster" {
             job_name   = "integrations/kubernetes/events"
             forward_to = [loki.write.loki.receiver]
