@@ -83,6 +83,7 @@ spec:
 
           loki.source.journal "all" {
             path       = "/var/log/journal"
+            labels     = {job = "integrations/journal"}
             forward_to = [loki.write.loki.receiver]
           }
 
@@ -97,9 +98,11 @@ spec:
 
           loki.source.kubernetes "pods" {
             targets    = discovery.kubernetes.pods.targets
+            labels     = {job = "integrations/kubernetes/pods"}
             forward_to = [loki.write.loki.receiver]
           }
 
           loki.source.kubernetes_events "cluster" {
+            labels     = {job = "integrations/kubernetes/events"}
             forward_to = [loki.write.loki.receiver]
           }
