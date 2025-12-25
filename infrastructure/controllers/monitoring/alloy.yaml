@@ -47,6 +47,7 @@ spec:
           }
 
           node_exporter.kubernetes "targets" {
+            field_selectors = ["spec.nodeName=" + coalesce(sys.env("HOSTNAME"), constants.hostname)]
           }
 
           node_exporter.scrape "metrics" {
