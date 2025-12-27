@@ -67,3 +67,6 @@ spec:
 
     minio:
       enabled: true
+      serviceAccount:
+        # Both Mimir and Loki charts use `minio-sa` by default
+        name: loki-minio-sa

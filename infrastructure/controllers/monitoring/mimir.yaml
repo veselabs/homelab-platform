@@ -13,3 +13,8 @@ spec:
         kind: HelmRepository
         name: grafana
   interval: 1m0s
+  values:
+    minio:
+      serviceAccount:
+        # Both Mimir and Loki charts use `minio-sa` by default
+        name: mimir-minio-sa
