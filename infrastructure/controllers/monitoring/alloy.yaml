@@ -91,10 +91,20 @@ spec:
             forward_to      = [prometheus.remote_write.mimir.receiver]
           }
 
+          loki.relabel "journal" {
+            forward_to = []
+
+            rule {
+              source_labels = ["__journal__hostname"]
+              target_label  = "node"
+            }
+          }
+
           loki.source.journal "all" {
-            path       = "/var/log/journal"
-            labels     = {job = "integrations/journal"}
-            forward_to = [loki.write.loki.receiver]
+            path          = "/var/log/journal"
+            labels        = {job = "integrations/journal"}
+            relabel_rules = loki.relabel.journal.rules
+            forward_to    = [loki.write.loki.receiver]
           }
 
           discovery.kubernetes "pods" {
