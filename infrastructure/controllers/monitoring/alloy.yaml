@@ -50,8 +50,17 @@ spec:
             field_selectors = ["spec.nodeName=" + coalesce(sys.env("HOSTNAME"), constants.hostname)]
           }
 
+          discovery.relabel "node_exporter" {
+            targets = node_exporter.kubernetes.targets.output
+
+            rule {
+              source_labels = ["__meta_kubernetes_pod_node_name"]
+              target_label  = "node"
+            }
+          }
+
           node_exporter.scrape "metrics" {
-            targets    = node_exporter.kubernetes.targets.output
+            targets    = discovery.relabel.node_exporter.output
             forward_to = [prometheus.remote_write.mimir.receiver]
           }
 
