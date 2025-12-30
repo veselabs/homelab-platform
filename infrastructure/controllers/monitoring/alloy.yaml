@@ -126,17 +126,48 @@ spec:
             }
           }
 
-          loki.source.kubernetes "pods" {
-            targets    = discovery.kubernetes.pods.targets
-            forward_to = [loki.process.pods.receiver]
+          discovery.relabel "pods" {
+            targets = discovery.kubernetes.pods.targets
+
+            rule {
+              target_label = "job"
+              replacement  = "integrations/kubernetes/pods"
+            }
+
+            rule {
+              source_labels = ["__meta_kubernetes_pod_node_name"]
+              target_label  = "node"
+            }
+
+            rule {
+              source_labels = ["__meta_kubernetes_namespace"]
+              target_label  = "namespace"
+            }
+
+            rule {
+              source_labels = ["__meta_kubernetes_pod_controller_kind"]
+              target_label  = "kind"
+            }
+
+            rule {
+              source_labels = ["__meta_kubernetes_pod_controller_name"]
+              target_label  = "name"
+            }
+
+            rule {
+              source_labels = ["__meta_kubernetes_pod_name"]
+              target_label  = "pod"
+            }
+
+            rule {
+              source_labels = ["__meta_kubernetes_pod_container_name"]
+              target_label  = "container"
+            }
           }
 
-          loki.process "pods" {
+          loki.source.kubernetes "pods" {
+            targets    = discovery.relabel.pods.output
             forward_to = [loki.write.loki.receiver]
-
-            stage.static_labels {
-              values = {job = "integrations/kubernetes/pods"}
-            }
           }
 
           loki.source.kubernetes_events "cluster" {
