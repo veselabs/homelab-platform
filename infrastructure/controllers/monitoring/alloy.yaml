@@ -50,8 +50,17 @@ spec:
             field_selectors = ["spec.nodeName=" + coalesce(sys.env("HOSTNAME"), constants.hostname)]
           }
 
+          discovery.relabel "node_exporter" {
+            targets = node_exporter.kubernetes.targets.output
+
+            rule {
+              source_labels = ["__meta_kubernetes_pod_node_name"]
+              target_label  = "node"
+            }
+          }
+
           node_exporter.scrape "metrics" {
-            targets    = node_exporter.kubernetes.targets.output
+            targets    = discovery.relabel.node_exporter.output
             forward_to = [prometheus.remote_write.mimir.receiver]
           }
 
@@ -82,10 +91,30 @@ spec:
             forward_to      = [prometheus.remote_write.mimir.receiver]
           }
 
+          loki.relabel "journal" {
+            forward_to = []
+
+            rule {
+              source_labels = ["__journal__hostname"]
+              target_label  = "node"
+            }
+
+            rule {
+              source_labels = ["__journal__systemd_unit"]
+              target_label  = "unit"
+            }
+
+            rule {
+              source_labels = ["__journal__priority"]
+              target_label  = "priority"
+            }
+          }
+
           loki.source.journal "all" {
-            path       = "/var/log/journal"
-            labels     = {job = "integrations/journal"}
-            forward_to = [loki.write.loki.receiver]
+            path          = "/var/log/journal"
+            labels        = {job = "integrations/journal"}
+            relabel_rules = loki.relabel.journal.rules
+            forward_to    = [loki.write.loki.receiver]
           }
 
           discovery.kubernetes "pods" {
@@ -97,17 +126,48 @@ spec:
             }
           }
 
-          loki.source.kubernetes "pods" {
-            targets    = discovery.kubernetes.pods.targets
-            forward_to = [loki.process.pods.receiver]
+          discovery.relabel "pods" {
+            targets = discovery.kubernetes.pods.targets
+
+            rule {
+              target_label = "job"
+              replacement  = "integrations/kubernetes/pods"
+            }
+
+            rule {
+              source_labels = ["__meta_kubernetes_pod_node_name"]
+              target_label  = "node"
+            }
+
+            rule {
+              source_labels = ["__meta_kubernetes_namespace"]
+              target_label  = "namespace"
+            }
+
+            rule {
+              source_labels = ["__meta_kubernetes_pod_controller_kind"]
+              target_label  = "kind"
+            }
+
+            rule {
+              source_labels = ["__meta_kubernetes_pod_controller_name"]
+              target_label  = "name"
+            }
+
+            rule {
+              source_labels = ["__meta_kubernetes_pod_name"]
+              target_label  = "pod"
+            }
+
+            rule {
+              source_labels = ["__meta_kubernetes_pod_container_name"]
+              target_label  = "container"
+            }
           }
 
-          loki.process "pods" {
+          loki.source.kubernetes "pods" {
+            targets    = discovery.relabel.pods.output
             forward_to = [loki.write.loki.receiver]
-
-            stage.static_labels {
-              values = {job = "integrations/kubernetes/pods"}
-            }
           }
 
           loki.source.kubernetes_events "cluster" {
