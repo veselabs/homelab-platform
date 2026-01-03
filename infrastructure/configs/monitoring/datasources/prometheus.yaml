@@ -1,0 +1,13 @@
+---
+apiVersion: 1
+prune: true
+datasources:
+  - name: Prometheus
+    type: prometheus
+    uid: prometheus
+    url: http://mimir-gateway.monitoring.svc.cluster.local:80/prometheus
+    isDefault: true
+    jsonData:
+      httpHeaderName1: X-Scope-OrgID
+    secureJsonData:
+      httpHeaderValue1: homelab
