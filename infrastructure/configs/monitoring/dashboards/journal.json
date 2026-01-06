@@ -56,7 +56,7 @@
           },
           "direction": "forward",
           "editorMode": "builder",
-          "expr": "{job=\"integrations/journal\"} |= ``",
+          "expr": "{job=\"integrations/journal\", node=~\"$node\"} |= ``",
           "queryType": "range",
           "refId": "A"
         }
@@ -69,7 +69,34 @@
   "schemaVersion": 42,
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": ".+",
+        "current": {
+          "text": ["All"],
+          "value": ["$__all"]
+        },
+        "datasource": {
+          "type": "loki",
+          "uid": "loki"
+        },
+        "definition": "",
+        "description": "",
+        "includeAll": true,
+        "multi": true,
+        "name": "node",
+        "options": [],
+        "query": {
+          "label": "node",
+          "refId": "LokiVariableQueryEditor-VariableQuery",
+          "stream": "",
+          "type": 1
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      }
+    ]
   },
   "time": {
     "from": "now-6h",
@@ -79,5 +106,5 @@
   "timezone": "browser",
   "title": "Journal logs",
   "uid": "adfb2vf",
-  "version": 9
+  "version": 14
 }
