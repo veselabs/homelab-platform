@@ -141,6 +141,7 @@
         "dedupStrategy": "none",
         "enableInfiniteScrolling": false,
         "enableLogDetails": true,
+        "fontSize": "small",
         "showControls": false,
         "showLabels": true,
         "showTime": true,
