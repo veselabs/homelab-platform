@@ -9,3 +9,4 @@ configMapGenerator:
   - name: grafana-dashboards
     files:
       - ./journal.json
+      - ./kubernetes-events.json
