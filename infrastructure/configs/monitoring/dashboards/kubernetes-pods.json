@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
+  "id": 3,
   "links": [],
   "panels": [
     {
@@ -111,7 +111,7 @@
           },
           "direction": "backward",
           "editorMode": "code",
-          "expr": "sum(count_over_time({job=\"integrations/journal\", node=~\"$node\", priority=~\"$priority\", unit=~\"$unit\"} |= `` [$__auto]))",
+          "expr": "sum(count_over_time({job=\"integrations/kubernetes/pods\", node=~\"$node\", namespace=~\"$namespace\", kind=~\"$kind\", name=~\"$name\", pod=~\"$pod\", container=~\"$container\"} |= `` [$__auto]))",
           "legendFormat": "Total",
           "queryType": "range",
           "refId": "A",
@@ -157,7 +157,7 @@
           },
           "direction": "forward",
           "editorMode": "code",
-          "expr": "{job=\"integrations/journal\", node=~\"$node\", priority=~\"$priority\", unit=~\"$unit\"} |= ``",
+          "expr": "{job=\"integrations/kubernetes/pods\", node=~\"$node\", namespace=~\"$namespace\", kind=~\"$kind\", name=~\"$name\", pod=~\"$pod\", container=~\"$container\"} |= ``",
           "queryType": "range",
           "refId": "A"
         }
@@ -211,10 +211,10 @@
         "description": "",
         "includeAll": true,
         "multi": true,
-        "name": "priority",
+        "name": "namespace",
         "options": [],
         "query": {
-          "label": "priority",
+          "label": "namespace",
           "refId": "LokiVariableQueryEditor-VariableQuery",
           "stream": "",
           "type": 1
@@ -237,10 +237,88 @@
         "description": "",
         "includeAll": true,
         "multi": true,
-        "name": "unit",
+        "name": "kind",
         "options": [],
         "query": {
-          "label": "unit",
+          "label": "kind",
+          "refId": "LokiVariableQueryEditor-VariableQuery",
+          "stream": "",
+          "type": 1
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "allValue": ".+",
+        "current": {
+          "text": ["All"],
+          "value": ["$__all"]
+        },
+        "datasource": {
+          "type": "loki",
+          "uid": "loki"
+        },
+        "definition": "",
+        "description": "",
+        "includeAll": true,
+        "multi": true,
+        "name": "name",
+        "options": [],
+        "query": {
+          "label": "name",
+          "refId": "LokiVariableQueryEditor-VariableQuery",
+          "stream": "",
+          "type": 1
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "allValue": ".+",
+        "current": {
+          "text": ["All"],
+          "value": ["$__all"]
+        },
+        "datasource": {
+          "type": "loki",
+          "uid": "loki"
+        },
+        "definition": "",
+        "description": "",
+        "includeAll": true,
+        "multi": true,
+        "name": "pod",
+        "options": [],
+        "query": {
+          "label": "pod",
+          "refId": "LokiVariableQueryEditor-VariableQuery",
+          "stream": "",
+          "type": 1
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "allValue": ".+",
+        "current": {
+          "text": ["All"],
+          "value": ["$__all"]
+        },
+        "datasource": {
+          "type": "loki",
+          "uid": "loki"
+        },
+        "definition": "",
+        "description": "",
+        "includeAll": true,
+        "multi": true,
+        "name": "container",
+        "options": [],
+        "query": {
+          "label": "container",
           "refId": "LokiVariableQueryEditor-VariableQuery",
           "stream": "",
           "type": 1
@@ -257,7 +335,7 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Journal logs",
-  "uid": "adfb2vf",
+  "title": "Kubernetes Pod logs",
+  "uid": "adlvzbs",
   "version": 1
 }
