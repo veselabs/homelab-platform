@@ -111,7 +111,7 @@
           },
           "direction": "backward",
           "editorMode": "code",
-          "expr": "sum(count_over_time({job=\"integrations/journal\", node=~\"$node\", priority=~\"$priority\", unit=~\"$unit\"} |= `` [$__auto]))",
+          "expr": "sum(count_over_time({job=\"integrations/journal\", node=~\"$node\", priority=~\"$priority\", unit=~\"$unit\"} $query [$__auto]))",
           "legendFormat": "Total",
           "queryType": "range",
           "refId": "A",
@@ -157,7 +157,7 @@
           },
           "direction": "forward",
           "editorMode": "code",
-          "expr": "{job=\"integrations/journal\", node=~\"$node\", priority=~\"$priority\", unit=~\"$unit\"} |= ``",
+          "expr": "{job=\"integrations/journal\", node=~\"$node\", priority=~\"$priority\", unit=~\"$unit\"} $query",
           "queryType": "range",
           "refId": "A"
         }
@@ -248,6 +248,22 @@
         "refresh": 1,
         "regex": "",
         "type": "query"
+      },
+      {
+        "current": {
+          "text": "",
+          "value": ""
+        },
+        "name": "query",
+        "options": [
+          {
+            "selected": true,
+            "text": "",
+            "value": ""
+          }
+        ],
+        "query": "",
+        "type": "textbox"
       }
     ]
   },
