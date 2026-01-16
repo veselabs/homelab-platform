@@ -111,7 +111,7 @@
           },
           "direction": "backward",
           "editorMode": "code",
-          "expr": "sum(count_over_time({job=\"integrations/kubernetes/pods\", node=~\"$node\", namespace=~\"$namespace\", kind=~\"$kind\", name=~\"$name\", pod=~\"$pod\", container=~\"$container\"} |= `` [$__auto]))",
+          "expr": "sum(count_over_time({job=\"integrations/kubernetes/pods\", node=~\"$node\", namespace=~\"$namespace\", kind=~\"$kind\", name=~\"$name\", pod=~\"$pod\", container=~\"$container\"} $query [$__auto]))",
           "legendFormat": "Total",
           "queryType": "range",
           "refId": "A",
@@ -157,7 +157,7 @@
           },
           "direction": "forward",
           "editorMode": "code",
-          "expr": "{job=\"integrations/kubernetes/pods\", node=~\"$node\", namespace=~\"$namespace\", kind=~\"$kind\", name=~\"$name\", pod=~\"$pod\", container=~\"$container\"} |= ``",
+          "expr": "{job=\"integrations/kubernetes/pods\", node=~\"$node\", namespace=~\"$namespace\", kind=~\"$kind\", name=~\"$name\", pod=~\"$pod\", container=~\"$container\"} $query",
           "queryType": "range",
           "refId": "A"
         }
@@ -326,6 +326,22 @@
         "refresh": 1,
         "regex": "",
         "type": "query"
+      },
+      {
+        "current": {
+          "text": "",
+          "value": ""
+        },
+        "name": "query",
+        "options": [
+          {
+            "selected": true,
+            "text": "",
+            "value": ""
+          }
+        ],
+        "query": "",
+        "type": "textbox"
       }
     ]
   },
