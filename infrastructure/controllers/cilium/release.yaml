@@ -24,6 +24,7 @@ spec:
         burst: 20
     gatewayAPI:
       enabled: true
+      enableAlpn: true
     hubble:
       relay:
         enabled: true
