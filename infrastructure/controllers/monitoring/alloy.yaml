@@ -15,6 +15,14 @@ spec:
   interval: 1m0s
   values:
     alloy:
+      extraPorts:
+        - name: otlp-grpc
+          port: 4317
+          targetPort: 4317
+          appProtocol: kubernetes.io/h2c
+        - name: otlp-http
+          port: 4318
+          targetPort: 4318
       mounts:
         varlog: true
       configMap:
@@ -172,5 +180,23 @@ spec:
 
           loki.source.kubernetes_events "cluster" {
             job_name   = "integrations/kubernetes/events"
+            forward_to = [loki.write.loki.receiver]
+          }
+
+          otelcol.receiver.otlp "default" {
+            grpc {}
+            http {}
+
+            output {
+              metrics = [otelcol.exporter.prometheus.default.input]
+              logs    = [otelcol.exporter.loki.default.input]
+            }
+          }
+
+          otelcol.exporter.prometheus "default" {
+            forward_to = [prometheus.remote_write.mimir.receiver]
+          }
+
+          otelcol.exporter.loki "default" {
             forward_to = [loki.write.loki.receiver]
           }
