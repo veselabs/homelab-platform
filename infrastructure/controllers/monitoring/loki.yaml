@@ -25,6 +25,13 @@ spec:
               prefix: loki_index_
               period: 24h
 
+      limits_config:
+        retention_period: 14d
+
+      compactor:
+        retention_enabled: true
+        delete_request_store: s3
+
     deploymentMode: Distributed
 
     ingester:
