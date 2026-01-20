@@ -18,3 +18,8 @@ spec:
       serviceAccount:
         # Both Mimir and Loki charts use `minio-sa` by default
         name: mimir-minio-sa
+
+    mimir:
+      structuredConfig:
+        limits:
+          compactor_blocks_retention_period: 14d
