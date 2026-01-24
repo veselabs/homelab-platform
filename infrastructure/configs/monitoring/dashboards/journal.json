@@ -190,7 +190,7 @@
         "query": {
           "label": "node",
           "refId": "LokiVariableQueryEditor-VariableQuery",
-          "stream": "",
+          "stream": "{job=\"integrations/journal\"}",
           "type": 1
         },
         "refresh": 1,
@@ -216,7 +216,7 @@
         "query": {
           "label": "priority",
           "refId": "LokiVariableQueryEditor-VariableQuery",
-          "stream": "",
+          "stream": "{job=\"integrations/journal\"}",
           "type": 1
         },
         "refresh": 1,
@@ -242,7 +242,7 @@
         "query": {
           "label": "unit",
           "refId": "LokiVariableQueryEditor-VariableQuery",
-          "stream": "",
+          "stream": "{job=\"integrations/journal\"}",
           "type": 1
         },
         "refresh": 1,
@@ -275,5 +275,5 @@
   "timezone": "browser",
   "title": "Journal logs",
   "uid": "adfb2vf",
-  "version": 1
+  "version": 13
 }

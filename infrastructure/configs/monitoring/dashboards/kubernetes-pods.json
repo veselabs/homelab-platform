@@ -190,7 +190,7 @@
         "query": {
           "label": "node",
           "refId": "LokiVariableQueryEditor-VariableQuery",
-          "stream": "",
+          "stream": "{job=\"integrations/kubernetes/pods\"}",
           "type": 1
         },
         "refresh": 1,
@@ -216,7 +216,7 @@
         "query": {
           "label": "namespace",
           "refId": "LokiVariableQueryEditor-VariableQuery",
-          "stream": "",
+          "stream": "{job=\"integrations/kubernetes/pods\"}",
           "type": 1
         },
         "refresh": 1,
@@ -242,7 +242,7 @@
         "query": {
           "label": "kind",
           "refId": "LokiVariableQueryEditor-VariableQuery",
-          "stream": "",
+          "stream": "{job=\"integrations/kubernetes/pods\"}",
           "type": 1
         },
         "refresh": 1,
@@ -268,7 +268,7 @@
         "query": {
           "label": "name",
           "refId": "LokiVariableQueryEditor-VariableQuery",
-          "stream": "",
+          "stream": "{job=\"integrations/kubernetes/pods\"}",
           "type": 1
         },
         "refresh": 1,
@@ -294,7 +294,7 @@
         "query": {
           "label": "pod",
           "refId": "LokiVariableQueryEditor-VariableQuery",
-          "stream": "",
+          "stream": "{job=\"integrations/kubernetes/pods\"}",
           "type": 1
         },
         "refresh": 1,
@@ -320,7 +320,7 @@
         "query": {
           "label": "container",
           "refId": "LokiVariableQueryEditor-VariableQuery",
-          "stream": "",
+          "stream": "{job=\"integrations/kubernetes/pods\"}",
           "type": 1
         },
         "refresh": 1,
