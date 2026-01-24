@@ -157,7 +157,7 @@
           },
           "direction": "forward",
           "editorMode": "code",
-          "expr": "{job=\"integrations/journal\", node=~\"$node\", priority=~\"$priority\", unit=~\"$unit\"} $query",
+          "expr": "{job=\"integrations/journal\", node=~\"$node\", priority=~\"$priority\", unit=~\"$unit\"} $query | label_format priority=`{{if eq .priority \"0\"}}emerg{{else if eq .priority \"1\"}}alert{{else if eq .priority \"2\"}}crit{{else if eq .priority \"3\"}}err{{else if eq .priority \"4\"}}warning{{else if eq .priority \"5\"}}notice{{else if eq .priority \"6\"}}info{{else if eq .priority \"7\"}}debug{{else}}{{.priority}}{{end}}`",
           "queryType": "range",
           "refId": "A"
         }
