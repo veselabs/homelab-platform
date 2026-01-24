@@ -203,25 +203,53 @@
           "text": ["All"],
           "value": ["$__all"]
         },
-        "datasource": {
-          "type": "loki",
-          "uid": "loki"
-        },
-        "definition": "",
-        "description": "",
         "includeAll": true,
         "multi": true,
         "name": "priority",
-        "options": [],
-        "query": {
-          "label": "priority",
-          "refId": "LokiVariableQueryEditor-VariableQuery",
-          "stream": "{job=\"integrations/journal\"}",
-          "type": 1
-        },
-        "refresh": 1,
-        "regex": "",
-        "type": "query"
+        "options": [
+          {
+            "selected": false,
+            "text": "emerg",
+            "value": "0"
+          },
+          {
+            "selected": false,
+            "text": "alert",
+            "value": "1"
+          },
+          {
+            "selected": false,
+            "text": "crit",
+            "value": "2"
+          },
+          {
+            "selected": false,
+            "text": "err",
+            "value": "3"
+          },
+          {
+            "selected": false,
+            "text": "warning",
+            "value": "4"
+          },
+          {
+            "selected": false,
+            "text": "notice",
+            "value": "5"
+          },
+          {
+            "selected": false,
+            "text": "info",
+            "value": "6"
+          },
+          {
+            "selected": false,
+            "text": "debug",
+            "value": "7"
+          }
+        ],
+        "query": "emerg : 0, alert : 1, crit : 2, err : 3, warning : 4, notice : 5, info : 6, debug : 7",
+        "type": "custom"
       },
       {
         "allValue": ".+",
@@ -275,5 +303,5 @@
   "timezone": "browser",
   "title": "Journal logs",
   "uid": "adfb2vf",
-  "version": 13
+  "version": 14
 }
