@@ -143,10 +143,10 @@
         "enableLogDetails": true,
         "fontSize": "small",
         "showControls": false,
-        "showLabels": true,
+        "showLabels": false,
         "showTime": true,
         "sortOrder": "Ascending",
-        "wrapLogMessage": false
+        "wrapLogMessage": true
       },
       "pluginVersion": "12.3.0",
       "targets": [
