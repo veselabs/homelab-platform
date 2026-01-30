@@ -11,3 +11,4 @@ configMapGenerator:
       - ./journal.json
       - ./kubernetes-events.json
       - ./kubernetes-pods.json
+      - ./node-exporter.json
