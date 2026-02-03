@@ -12,3 +12,4 @@ configMapGenerator:
       - ./kubernetes-events.json
       - ./kubernetes-pods.json
       - ./bare-metal_views_nodes.json
+      - ./bare-metal_logs_system.json
