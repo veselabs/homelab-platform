@@ -27,6 +27,10 @@ spec:
         varlog: true
       configMap:
         content: |
+          livedebugging {
+            enabled = true
+          }
+
           prometheus.remote_write "mimir" {
             endpoint {
               url = "http://mimir-gateway.monitoring.svc.cluster.local:80/api/v1/push"
