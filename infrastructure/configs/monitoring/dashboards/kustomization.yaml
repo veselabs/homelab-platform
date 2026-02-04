@@ -13,3 +13,4 @@ configMapGenerator:
       - ./kubernetes_logs_system.json
       - ./kubernetes_logs_events.json
       - ./kubernetes_logs_pods.json
+      - ./kubernetes_views_global.json
