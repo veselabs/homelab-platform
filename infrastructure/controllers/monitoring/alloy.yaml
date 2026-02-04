@@ -89,6 +89,7 @@ spec:
 
           ksm.scrape "metrics" {
             targets    = ksm.kubernetes.targets.output
+            job_label  = "kubernetes/kube-state-metrics"
             forward_to = [prometheus.remote_write.mimir.receiver]
           }
 
