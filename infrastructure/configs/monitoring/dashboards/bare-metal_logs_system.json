@@ -111,7 +111,7 @@
           },
           "direction": "backward",
           "editorMode": "code",
-          "expr": "sum(count_over_time({job=\"loki.source.journal.default\", node=~\"$node\", priority=~\"$priority\", unit=~\"$unit\"} $query [$__auto]))",
+          "expr": "sum(count_over_time({job=\"bare_metal/journal\", node=~\"$node\", priority=~\"$priority\", unit=~\"$unit\"} $query [$__auto]))",
           "legendFormat": "Total",
           "queryType": "range",
           "refId": "A",
@@ -157,7 +157,7 @@
           },
           "direction": "forward",
           "editorMode": "code",
-          "expr": "{job=\"loki.source.journal.default\", node=~\"$node\", priority=~\"$priority\", unit=~\"$unit\"} $query | label_format priority=`{{if eq .priority \"0\"}}emerg{{else if eq .priority \"1\"}}alert{{else if eq .priority \"2\"}}crit{{else if eq .priority \"3\"}}err{{else if eq .priority \"4\"}}warning{{else if eq .priority \"5\"}}notice{{else if eq .priority \"6\"}}info{{else if eq .priority \"7\"}}debug{{else}}{{.priority}}{{end}}`",
+          "expr": "{job=\"bare_metal/journal\", node=~\"$node\", priority=~\"$priority\", unit=~\"$unit\"} $query | label_format priority=`{{if eq .priority \"0\"}}emerg{{else if eq .priority \"1\"}}alert{{else if eq .priority \"2\"}}crit{{else if eq .priority \"3\"}}err{{else if eq .priority \"4\"}}warning{{else if eq .priority \"5\"}}notice{{else if eq .priority \"6\"}}info{{else if eq .priority \"7\"}}debug{{else}}{{.priority}}{{end}}`",
           "queryType": "range",
           "refId": "A"
         }
@@ -190,7 +190,7 @@
         "query": {
           "label": "node",
           "refId": "LokiVariableQueryEditor-VariableQuery",
-          "stream": "{job=\"loki.source.journal.default\"}",
+          "stream": "{job=\"bare_metal/journal\"}",
           "type": 1
         },
         "refresh": 1,
@@ -270,7 +270,7 @@
         "query": {
           "label": "unit",
           "refId": "LokiVariableQueryEditor-VariableQuery",
-          "stream": "{job=\"loki.source.journal.default\"}",
+          "stream": "{job=\"bare_metal/journal\"}",
           "type": 1
         },
         "refresh": 1,

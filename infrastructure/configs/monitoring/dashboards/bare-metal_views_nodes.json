@@ -15185,8 +15185,8 @@
       },
       {
         "current": {
-          "text": "integrations/unix",
-          "value": "integrations/unix"
+          "text": "bare_metal/unix",
+          "value": "bare_metal/unix"
         },
         "datasource": {
           "type": "prometheus",
