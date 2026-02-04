@@ -117,6 +117,11 @@ spec:
             forward_to      = [prometheus.remote_write.mimir.receiver]
           }
 
+          k8s.kubelet "scrape" {
+            job_label       = "kubernetes/kubelet"
+            forward_to      = [prometheus.remote_write.mimir.receiver]
+          }
+
           loki.relabel "journal" {
             forward_to = []
 
