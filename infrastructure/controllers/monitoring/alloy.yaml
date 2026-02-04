@@ -99,7 +99,7 @@ spec:
 
           loki.source.journal "all" {
             path          = "/var/log/journal"
-            labels        = {job = "integrations/journal"}
+            labels        = {job = "kubernetes/journal"}
             relabel_rules = loki.relabel.journal.rules
             forward_to    = [loki.write.loki.receiver]
           }
