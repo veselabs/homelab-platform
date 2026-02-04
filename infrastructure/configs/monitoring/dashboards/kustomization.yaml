@@ -8,8 +8,8 @@ generatorOptions:
 configMapGenerator:
   - name: grafana-dashboards
     files:
-      - ./kubernetes-pods.json
       - ./bare-metal_views_nodes.json
       - ./bare-metal_logs_system.json
       - ./kubernetes_logs_system.json
       - ./kubernetes_logs_events.json
+      - ./kubernetes_logs_pods.json

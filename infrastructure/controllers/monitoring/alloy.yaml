@@ -118,7 +118,7 @@ spec:
 
             rule {
               target_label = "job"
-              replacement  = "integrations/kubernetes/pods"
+              replacement  = "kubernetes/pods"
             }
 
             rule {
