@@ -51,6 +51,32 @@ spec:
             }
           }
 
+          import.git "node_exporter" {
+            repository     = "https://github.com/grafana/alloy-modules.git"
+            revision       = "v0.2.11"
+            path           = "modules/system/node-exporter/metrics.alloy"
+            pull_frequency = "0s"
+          }
+
+          node_exporter.kubernetes "targets" {
+            field_selectors = ["spec.nodeName=" + coalesce(sys.env("HOSTNAME"), constants.hostname)]
+          }
+
+          discovery.relabel "node_exporter" {
+            targets = node_exporter.kubernetes.targets.output
+
+            rule {
+              source_labels = ["__meta_kubernetes_pod_node_name"]
+              target_label  = "node"
+            }
+          }
+
+          node_exporter.scrape "metrics" {
+            targets    = discovery.relabel.node_exporter.output
+            job_label  = "kubernetes/unix"
+            forward_to = [prometheus.remote_write.mimir.receiver]
+          }
+
           import.git "ksm" {
             repository     = "https://github.com/grafana/alloy-modules.git"
             revision       = "v0.2.11"
