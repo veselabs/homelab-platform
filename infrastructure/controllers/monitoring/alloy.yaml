@@ -111,6 +111,12 @@ spec:
             forward_to      = [prometheus.remote_write.mimir.receiver]
           }
 
+          k8s.kube_dns "scrape" {
+            field_selectors = ["metadata.name=coredns"]
+            job_label       = "kubernetes/coredns"
+            forward_to      = [prometheus.remote_write.mimir.receiver]
+          }
+
           loki.relabel "journal" {
             forward_to = []
 
