@@ -18,3 +18,4 @@ configMapGenerator:
       - ./kubernetes_views_namespaces.json
       - ./kubernetes_views_pods.json
       - ./kubernetes_system_api-server.json
+      - ./kubernetes_system_coredns.json
