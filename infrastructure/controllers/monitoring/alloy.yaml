@@ -102,6 +102,7 @@ spec:
 
           k8s.cadvisor "scrape" {
             field_selectors = ["metadata.name=" + coalesce(sys.env("HOSTNAME"), constants.hostname)]
+            job_label       = "kubernetes/cadvisor"
             forward_to      = [prometheus.remote_write.mimir.receiver]
           }
 
