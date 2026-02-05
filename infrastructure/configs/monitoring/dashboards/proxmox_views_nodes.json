@@ -1894,13 +1894,14 @@
           "type": "prometheus",
           "uid": "prometheus"
         },
-        "definition": "label_values(pve_node_info, instance)",
+        "definition": "label_values(target_info{job=\"proxmox-ve\"},proxmox_node)",
         "includeAll": false,
         "name": "instance",
         "options": [],
         "query": {
-          "query": "label_values(pve_node_info, instance)",
-          "refId": "Prometheus-instance-Variable-Query"
+          "qryType": 1,
+          "query": "label_values(target_info{job=\"proxmox-ve\"},proxmox_node)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
         "regex": "",
