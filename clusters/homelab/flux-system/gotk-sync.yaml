@@ -8,7 +8,7 @@ metadata:
 spec:
   interval: 1m0s
   ref:
-    branch: master
+    branch: 86-proxmox-dashboards
   secretRef:
     name: flux-system
   url: ssh://git@github.com/veselabs/homelab-platform
