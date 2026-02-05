@@ -19,3 +19,4 @@ configMapGenerator:
       - ./kubernetes_views_namespaces.json
       - ./kubernetes_views_nodes.json
       - ./kubernetes_views_pods.json
+      - ./proxmox.json
