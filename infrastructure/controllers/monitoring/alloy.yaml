@@ -51,6 +51,32 @@ spec:
             }
           }
 
+          import.git "node_exporter" {
+            repository     = "https://github.com/grafana/alloy-modules.git"
+            revision       = "v0.2.11"
+            path           = "modules/system/node-exporter/metrics.alloy"
+            pull_frequency = "0s"
+          }
+
+          node_exporter.kubernetes "targets" {
+            field_selectors = ["spec.nodeName=" + coalesce(sys.env("HOSTNAME"), constants.hostname)]
+          }
+
+          discovery.relabel "node_exporter" {
+            targets = node_exporter.kubernetes.targets.output
+
+            rule {
+              source_labels = ["__meta_kubernetes_pod_node_name"]
+              target_label  = "node"
+            }
+          }
+
+          node_exporter.scrape "metrics" {
+            targets    = discovery.relabel.node_exporter.output
+            job_label  = "kubernetes/unix"
+            forward_to = [prometheus.remote_write.mimir.receiver]
+          }
+
           import.git "ksm" {
             repository     = "https://github.com/grafana/alloy-modules.git"
             revision       = "v0.2.11"
@@ -63,6 +89,7 @@ spec:
 
           ksm.scrape "metrics" {
             targets    = ksm.kubernetes.targets.output
+            job_label  = "kubernetes/kube-state-metrics"
             forward_to = [prometheus.remote_write.mimir.receiver]
           }
 
@@ -75,6 +102,23 @@ spec:
 
           k8s.cadvisor "scrape" {
             field_selectors = ["metadata.name=" + coalesce(sys.env("HOSTNAME"), constants.hostname)]
+            job_label       = "kubernetes/cadvisor"
+            forward_to      = [prometheus.remote_write.mimir.receiver]
+          }
+
+          k8s.apiserver "scrape" {
+            job_label       = "kubernetes/apiserver"
+            forward_to      = [prometheus.remote_write.mimir.receiver]
+          }
+
+          k8s.kube_dns "scrape" {
+            field_selectors = ["metadata.name=coredns"]
+            job_label       = "kubernetes/coredns"
+            forward_to      = [prometheus.remote_write.mimir.receiver]
+          }
+
+          k8s.kubelet "scrape" {
+            job_label       = "kubernetes/kubelet"
             forward_to      = [prometheus.remote_write.mimir.receiver]
           }
 
@@ -99,7 +143,7 @@ spec:
 
           loki.source.journal "all" {
             path          = "/var/log/journal"
-            labels        = {job = "integrations/journal"}
+            labels        = {job = "kubernetes/journal"}
             relabel_rules = loki.relabel.journal.rules
             forward_to    = [loki.write.loki.receiver]
           }
@@ -118,7 +162,7 @@ spec:
 
             rule {
               target_label = "job"
-              replacement  = "integrations/kubernetes/pods"
+              replacement  = "kubernetes/pods"
             }
 
             rule {
@@ -158,7 +202,7 @@ spec:
           }
 
           loki.source.kubernetes_events "cluster" {
-            job_name   = "integrations/kubernetes/events"
+            job_name   = "kubernetes/events"
             forward_to = [loki.write.loki.receiver]
           }
 

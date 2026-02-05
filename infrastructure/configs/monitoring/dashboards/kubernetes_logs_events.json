@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 3,
+  "id": 2,
   "links": [],
   "panels": [
     {
@@ -111,7 +111,7 @@
           },
           "direction": "backward",
           "editorMode": "code",
-          "expr": "sum(count_over_time({job=\"integrations/kubernetes/pods\", node=~\"$node\", namespace=~\"$namespace\", kind=~\"$kind\", name=~\"$name\", pod=~\"$pod\", container=~\"$container\"} $query [$__auto]))",
+          "expr": "sum(count_over_time({job=\"kubernetes/events\", namespace=~\"$namespace\"} $query [$__auto]))",
           "legendFormat": "Total",
           "queryType": "range",
           "refId": "A",
@@ -143,10 +143,10 @@
         "enableLogDetails": true,
         "fontSize": "small",
         "showControls": false,
-        "showLabels": false,
+        "showLabels": true,
         "showTime": true,
         "sortOrder": "Ascending",
-        "wrapLogMessage": true
+        "wrapLogMessage": false
       },
       "pluginVersion": "12.3.0",
       "targets": [
@@ -157,7 +157,7 @@
           },
           "direction": "forward",
           "editorMode": "code",
-          "expr": "{job=\"integrations/kubernetes/pods\", node=~\"$node\", namespace=~\"$namespace\", kind=~\"$kind\", name=~\"$name\", pod=~\"$pod\", container=~\"$container\"} $query",
+          "expr": "{job=\"kubernetes/events\", namespace=~\"$namespace\"} $query",
           "queryType": "range",
           "refId": "A"
         }
@@ -168,35 +168,9 @@
   ],
   "preload": false,
   "schemaVersion": 42,
-  "tags": [],
+  "tags": ["Kubernetes", "Loki"],
   "templating": {
     "list": [
-      {
-        "allValue": ".+",
-        "current": {
-          "text": ["All"],
-          "value": ["$__all"]
-        },
-        "datasource": {
-          "type": "loki",
-          "uid": "loki"
-        },
-        "definition": "",
-        "description": "",
-        "includeAll": true,
-        "multi": true,
-        "name": "node",
-        "options": [],
-        "query": {
-          "label": "node",
-          "refId": "LokiVariableQueryEditor-VariableQuery",
-          "stream": "{job=\"integrations/kubernetes/pods\"}",
-          "type": 1
-        },
-        "refresh": 1,
-        "regex": "",
-        "type": "query"
-      },
       {
         "allValue": ".+",
         "current": {
@@ -216,111 +190,7 @@
         "query": {
           "label": "namespace",
           "refId": "LokiVariableQueryEditor-VariableQuery",
-          "stream": "{job=\"integrations/kubernetes/pods\"}",
-          "type": 1
-        },
-        "refresh": 1,
-        "regex": "",
-        "type": "query"
-      },
-      {
-        "allValue": ".+",
-        "current": {
-          "text": ["All"],
-          "value": ["$__all"]
-        },
-        "datasource": {
-          "type": "loki",
-          "uid": "loki"
-        },
-        "definition": "",
-        "description": "",
-        "includeAll": true,
-        "multi": true,
-        "name": "kind",
-        "options": [],
-        "query": {
-          "label": "kind",
-          "refId": "LokiVariableQueryEditor-VariableQuery",
-          "stream": "{job=\"integrations/kubernetes/pods\"}",
-          "type": 1
-        },
-        "refresh": 1,
-        "regex": "",
-        "type": "query"
-      },
-      {
-        "allValue": ".+",
-        "current": {
-          "text": ["All"],
-          "value": ["$__all"]
-        },
-        "datasource": {
-          "type": "loki",
-          "uid": "loki"
-        },
-        "definition": "",
-        "description": "",
-        "includeAll": true,
-        "multi": true,
-        "name": "name",
-        "options": [],
-        "query": {
-          "label": "name",
-          "refId": "LokiVariableQueryEditor-VariableQuery",
-          "stream": "{job=\"integrations/kubernetes/pods\", node=~\"$node\", namespace=~\"$namespace\", kind=~\"$kind\"}",
-          "type": 1
-        },
-        "refresh": 1,
-        "regex": "",
-        "type": "query"
-      },
-      {
-        "allValue": ".+",
-        "current": {
-          "text": ["All"],
-          "value": ["$__all"]
-        },
-        "datasource": {
-          "type": "loki",
-          "uid": "loki"
-        },
-        "definition": "",
-        "description": "",
-        "includeAll": true,
-        "multi": true,
-        "name": "pod",
-        "options": [],
-        "query": {
-          "label": "pod",
-          "refId": "LokiVariableQueryEditor-VariableQuery",
-          "stream": "{job=\"integrations/kubernetes/pods\", node=~\"$node\", namespace=~\"$namespace\", kind=~\"$kind\", name=~\"$name\"}",
-          "type": 1
-        },
-        "refresh": 1,
-        "regex": "",
-        "type": "query"
-      },
-      {
-        "allValue": ".+",
-        "current": {
-          "text": ["All"],
-          "value": ["$__all"]
-        },
-        "datasource": {
-          "type": "loki",
-          "uid": "loki"
-        },
-        "definition": "",
-        "description": "",
-        "includeAll": true,
-        "multi": true,
-        "name": "container",
-        "options": [],
-        "query": {
-          "label": "container",
-          "refId": "LokiVariableQueryEditor-VariableQuery",
-          "stream": "{job=\"integrations/kubernetes/pods\", node=~\"$node\", namespace=~\"$namespace\", kind=~\"$kind\", name=~\"$name\", pod=~\"$pod\"}",
+          "stream": "{job=\"kubernetes/events\"}",
           "type": 1
         },
         "refresh": 1,
@@ -351,7 +221,7 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Kubernetes Pod logs",
-  "uid": "adlvzbs",
+  "title": "Kubernetes / Logs / Events",
+  "uid": "adt2hp8",
   "version": 1
 }
