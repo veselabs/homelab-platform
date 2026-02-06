@@ -970,7 +970,6 @@
         "y": 7
       },
       "id": 8,
-      "maxDataPoints": 100,
       "options": {
         "minVizHeight": 75,
         "minVizWidth": 75,
@@ -992,10 +991,14 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "pve_memory_usage_bytes{instance=\"$instance\"} / pve_memory_size_bytes and on(id) pve_node_info",
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "proxmox_node_memory_memused_bytes{job=\"proxmox-ve\", node=\"$instance\"} / proxmox_node_memory_memtotal_bytes{job=\"proxmox-ve\", node=\"$instance\"}",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 1,
           "legendFormat": "",
+          "range": false,
           "refId": "A"
         }
       ],
