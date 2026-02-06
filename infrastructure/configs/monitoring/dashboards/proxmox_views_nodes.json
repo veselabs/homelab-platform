@@ -773,7 +773,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "pve_cpu_usage_limit and on(id) pve_node_info",
+          "expr": "proxmox_node_cpustat_cpus_percent{job=\"proxmox-ve\", node=\"$instance\"}",
           "format": "table",
           "instant": true,
           "legendFormat": "__auto",
