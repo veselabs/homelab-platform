@@ -15,13 +15,13 @@ spec:
   interval: 1m0s
   values:
     minio:
+      persistence:
+        size: 15Gi
       serviceAccount:
         # Both Mimir and Loki charts use `minio-sa` by default
         name: mimir-minio-sa
 
     mimir:
-      persistence:
-        size: 15Gi
       structuredConfig:
         limits:
           compactor_blocks_retention_period: 14d
