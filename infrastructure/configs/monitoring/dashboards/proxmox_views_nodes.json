@@ -28,7 +28,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 39,
+  "id": 12,
   "links": [],
   "panels": [
     {
@@ -666,7 +666,6 @@
         "y": 0
       },
       "id": 7,
-      "maxDataPoints": 100,
       "options": {
         "minVizHeight": 75,
         "minVizWidth": 75,
@@ -688,10 +687,14 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "pve_cpu_usage_ratio{instance=\"$instance\"} / pve_cpu_usage_limit and on(id) pve_node_info",
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "proxmox_node_cpustat_cpu_percent{job=\"proxmox-ve\", node=\"$instance\"}",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 1,
-          "legendFormat": "",
+          "legendFormat": "__auto",
+          "range": false,
           "refId": "A"
         }
       ],
