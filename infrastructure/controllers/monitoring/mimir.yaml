@@ -27,3 +27,7 @@ spec:
     kafka:
       persistence:
         size: 15Gi
+
+    ingester:
+      persistentVolume:
+        size: 6Gi
