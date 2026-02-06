@@ -20,6 +20,8 @@ spec:
         name: mimir-minio-sa
 
     mimir:
+      persistence:
+        size: 15Gi
       structuredConfig:
         limits:
           compactor_blocks_retention_period: 14d
