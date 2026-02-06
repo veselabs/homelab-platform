@@ -526,6 +526,7 @@
             }
           },
           "mappings": [],
+          "max": 1,
           "min": 0,
           "thresholds": {
             "mode": "percentage",
@@ -543,7 +544,8 @@
                 "value": 90
               }
             ]
-          }
+          },
+          "unit": "percentunit"
         },
         "overrides": []
       },
@@ -575,42 +577,13 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "pve_cpu_usage_ratio{instance=\"$instance\"} and on(id) pve_node_info",
+          "expr": "proxmox_node_cpustat_cpu_percent{job=\"proxmox-ve\", node=\"$instance\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "usage"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "pve_cpu_usage_limit{instance=\"$instance\"} and on(id) pve_node_info",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "total"
         }
       ],
       "title": "CPU history",
-      "transformations": [
-        {
-          "id": "configFromData",
-          "options": {
-            "configRefId": "total",
-            "mappings": [
-              {
-                "fieldName": "Value",
-                "handlerKey": "max"
-              }
-            ]
-          }
-        }
-      ],
       "type": "timeseries"
     },
     {
