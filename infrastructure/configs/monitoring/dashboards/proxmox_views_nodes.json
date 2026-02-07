@@ -1332,11 +1332,13 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "(pve_memory_usage_bytes{instance=\"$instance\"} / pve_memory_size_bytes * on(id, instance) group_left(name, type) pve_guest_info) and on(id, instance) pve_up == 1",
+          "editorMode": "code",
+          "expr": "proxmox_vm_mem_bytes{job=\"proxmox-ve\", node=\"$instance\"} / proxmox_vm_maxmem_bytes{job=\"proxmox-ve\", node=\"$instance\"} and proxmox_vm_uptime_seconds > 0",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 4,
           "legendFormat": "{{name}} ({{type}})",
+          "range": true,
           "refId": "A"
         }
       ],
