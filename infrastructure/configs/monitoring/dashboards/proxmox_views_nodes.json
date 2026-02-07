@@ -1418,8 +1418,9 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
+          "editorMode": "code",
           "exemplar": true,
-          "expr": "pve_disk_usage_bytes{instance=\"$instance\", id=~\"storage/.+\"} / pve_disk_size_bytes * on (id, instance) group_left(storage) pve_storage_info",
+          "expr": "proxmox_storage_used_bytes{job=\"proxmox-ve\", node=\"$instance\"} / proxmox_storage_total_bytes{job=\"proxmox-ve\", node=\"$instance\"}",
           "format": "time_series",
           "instant": true,
           "interval": "",
