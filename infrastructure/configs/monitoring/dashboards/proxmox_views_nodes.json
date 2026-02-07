@@ -1654,11 +1654,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -1667,6 +1669,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 2,
             "pointSize": 5,
@@ -1674,6 +1677,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1690,7 +1694,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -1704,7 +1709,7 @@
           {
             "matcher": {
               "id": "byRegexp",
-              "options": "/RECV/"
+              "options": "/SEND/"
             },
             "properties": [
               {
@@ -1730,22 +1735,25 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.3.2",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "(rate(pve_network_receive_bytes{instance=\"$instance\"}[5m]) * on(id, instance) group_left(name, type) pve_guest_info) and on(id, instance) pve_up == 1",
+          "editorMode": "code",
+          "expr": "rate(proxmox_vm_netin_bytes_total{job=\"proxmox-ve\", node=\"$instance\"}[5m]) and proxmox_vm_uptime_seconds > 0",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 3,
           "legendFormat": "{{name}} RECV ({{type}})",
+          "range": true,
           "refId": "A"
         },
         {
@@ -1753,11 +1761,13 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "(rate(pve_network_transmit_bytes{instance=\"$instance\"}[5m])* on(id, instance) group_left(name, type) pve_guest_info) and on(id, instance) pve_up == 1",
+          "editorMode": "code",
+          "expr": "rate(proxmox_vm_netout_bytes_total{job=\"proxmox-ve\", node=\"$instance\"}[5m]) and proxmox_vm_uptime_seconds > 0",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 3,
           "legendFormat": "{{name}} SEND ({{type}})",
+          "range": true,
           "refId": "B"
         }
       ],
