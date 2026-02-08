@@ -2794,8 +2794,8 @@
       },
       {
         "current": {
-          "text": "monitoring",
-          "value": "monitoring"
+          "text": "",
+          "value": ""
         },
         "datasource": {
           "type": "prometheus",

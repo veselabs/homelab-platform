@@ -15208,8 +15208,8 @@
       },
       {
         "current": {
-          "text": "pve01",
-          "value": "pve01"
+          "text": "",
+          "value": ""
         },
         "datasource": {
           "type": "prometheus",
@@ -15231,8 +15231,8 @@
       },
       {
         "current": {
-          "text": "pve01",
-          "value": "pve01"
+          "text": "",
+          "value": ""
         },
         "datasource": {
           "type": "prometheus",
