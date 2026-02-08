@@ -3830,8 +3830,8 @@
       },
       {
         "current": {
-          "text": "master01",
-          "value": "master01"
+          "text": "",
+          "value": ""
         },
         "datasource": {
           "type": "prometheus",
@@ -3852,8 +3852,8 @@
       },
       {
         "current": {
-          "text": "10.42.1.21:9100",
-          "value": "10.42.1.21:9100"
+          "text": "",
+          "value": ""
         },
         "datasource": {
           "type": "prometheus",
