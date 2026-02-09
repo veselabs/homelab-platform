@@ -37,3 +37,7 @@ spec:
     alertmanager:
       persistentVolume:
         storageClass: longhorn-r1
+
+    compactor:
+      persistentVolume:
+        storageClass: longhorn-r1
