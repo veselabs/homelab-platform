@@ -33,3 +33,7 @@ spec:
     ingester:
       persistentVolume:
         size: 6Gi
+
+    alertmanager:
+      persistentVolume:
+        storageClass: longhorn-r1
