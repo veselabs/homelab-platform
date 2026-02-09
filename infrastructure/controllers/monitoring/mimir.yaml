@@ -41,3 +41,10 @@ spec:
     compactor:
       persistentVolume:
         storageClass: longhorn-r1
+
+    store_gateway:
+      replicas: 3
+      zoneAwareReplication:
+        enabled: false
+      persistentVolume:
+        storageClass: longhorn-r1
