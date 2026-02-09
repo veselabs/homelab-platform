@@ -9,7 +9,7 @@ metadata:
 parameters:
   backupTargetName: default
   dataEngine: v1
-  dataLocality: disabled
+  dataLocality: best-effort
   disableRevisionCounter: "true"
   fromBackup: ""
   fsType: ext4
@@ -28,7 +28,7 @@ metadata:
 parameters:
   backupTargetName: default
   dataEngine: v1
-  dataLocality: disabled
+  dataLocality: best-effort
   disableRevisionCounter: "true"
   fromBackup: ""
   fsType: ext4
@@ -47,7 +47,7 @@ metadata:
 parameters:
   backupTargetName: default
   dataEngine: v1
-  dataLocality: disabled
+  dataLocality: best-effort
   disableRevisionCounter: "true"
   fromBackup: ""
   fsType: ext4
