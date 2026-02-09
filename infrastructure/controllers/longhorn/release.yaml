@@ -13,3 +13,6 @@ spec:
         kind: HelmRepository
         name: longhorn
   interval: 1m0s
+  values:
+    persistence:
+      defaultClass: false
