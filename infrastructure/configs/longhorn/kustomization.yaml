@@ -4,3 +4,4 @@ kind: Kustomization
 namespace: longhorn
 resources:
   - ./httproute.yaml
+  - ./storageclass.yaml
