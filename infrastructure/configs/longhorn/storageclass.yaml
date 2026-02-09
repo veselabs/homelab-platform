@@ -5,7 +5,7 @@ kind: StorageClass
 metadata:
   annotations:
     storageclass.kubernetes.io/is-default-class: "true"
-  name: longhorn
+  name: longhorn-r3
 parameters:
   backupTargetName: default
   dataEngine: v1
