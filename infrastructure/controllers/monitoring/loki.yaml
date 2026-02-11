@@ -74,6 +74,10 @@ spec:
 
     minio:
       enabled: true
+      replicas: 2
+      drivesPerNode: 1
+      persistence:
+        storageClass: longhorn-r1
       serviceAccount:
         # Both Mimir and Loki charts use `minio-sa` by default
         name: loki-minio-sa
