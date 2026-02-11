@@ -22,6 +22,7 @@ spec:
 
     minio:
       persistence:
+        storageClass: longhorn-r2
         size: 15Gi
       serviceAccount:
         # Both Mimir and Loki charts use `minio-sa` by default
@@ -29,8 +30,8 @@ spec:
 
     kafka:
       persistence:
-        size: 15Gi
         storageClassName: longhorn-r2
+        size: 15Gi
 
     alertmanager:
       persistentVolume:
