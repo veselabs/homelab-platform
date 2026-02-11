@@ -42,7 +42,7 @@ spec:
         storageClass: longhorn-r1
 
     ingester:
-      replicas: 3
+      replicas: 2
       zoneAwareReplication:
         enabled: false
       persistentVolume:
@@ -50,7 +50,7 @@ spec:
         size: 4Gi
 
     store_gateway:
-      replicas: 3
+      replicas: 2
       zoneAwareReplication:
         enabled: false
       persistentVolume:
