@@ -31,7 +31,7 @@ spec:
     kafka:
       persistence:
         storageClassName: longhorn-r2
-        size: 15Gi
+        size: 20Gi
 
     alertmanager:
       persistentVolume:
