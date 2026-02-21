@@ -6,7 +6,7 @@ metadata:
 spec:
   chart:
     spec:
-      version: 1.10.1
+      version: 1.11.0
       chart: longhorn
       reconcileStrategy: ChartVersion
       sourceRef:
@@ -14,5 +14,11 @@ spec:
         name: longhorn
   interval: 1m0s
   values:
+    httproute:
+      enabled: true
+      parentRefs:
+        - name: gateway
+          namespace: kube-system
+      hostnames: [longhorn.homelab.veselabs.com]
     persistence:
       defaultClass: false
