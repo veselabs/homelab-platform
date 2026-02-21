@@ -17,10 +17,10 @@ spec:
     route:
       main:
         enabled: true
-        hostnames: [grafana.homelab.veselabs.com]
         parentRefs:
           - name: gateway
             namespace: kube-system
+        hostnames: [grafana.homelab.veselabs.com]
 
     sidecar:
       alerts:
