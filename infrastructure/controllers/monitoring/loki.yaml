@@ -26,7 +26,7 @@ spec:
               period: 24h
 
       limits_config:
-        retention_period: 14d
+        retention_period: 60d
 
       compactor:
         retention_enabled: true
