@@ -18,7 +18,7 @@ spec:
     mimir:
       structuredConfig:
         limits:
-          compactor_blocks_retention_period: 14d
+          compactor_blocks_retention_period: 60d
 
     minio:
       persistence:
