@@ -22,3 +22,5 @@ spec:
       hostnames: [longhorn.homelab.veselabs.com]
     persistence:
       defaultClass: false
+    defaultSettings:
+      createDefaultDiskLabeledNodes: true
