@@ -4,3 +4,4 @@ kind: Kustomization
 namespace: longhorn
 resources:
   - ./storageclass.yaml
+  - ./nodes.yaml
