@@ -22,7 +22,7 @@ spec:
 
     minio:
       persistence:
-        storageClass: longhorn-r2
+        storageClass: longhorn-slow-single
         size: 30Gi
       serviceAccount:
         # Both Mimir and Loki charts use `minio-sa` by default
@@ -30,16 +30,16 @@ spec:
 
     kafka:
       persistence:
-        storageClassName: longhorn-r2
+        storageClassName: longhorn-slow-single
         size: 20Gi
 
     alertmanager:
       persistentVolume:
-        storageClass: longhorn-r1
+        storageClass: longhorn-slow-single
 
     compactor:
       persistentVolume:
-        storageClass: longhorn-r1
+        storageClass: longhorn-slow-single
         size: 6Gi
 
     ingester:
@@ -47,7 +47,7 @@ spec:
       zoneAwareReplication:
         enabled: false
       persistentVolume:
-        storageClass: longhorn-r1
+        storageClass: longhorn-slow-single
         size: 4Gi
 
     store_gateway:
@@ -55,4 +55,4 @@ spec:
       zoneAwareReplication:
         enabled: false
       persistentVolume:
-        storageClass: longhorn-r1
+        storageClass: longhorn-slow-single
