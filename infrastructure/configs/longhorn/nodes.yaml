@@ -14,18 +14,26 @@ apiVersion: longhorn.io/v1beta2
 kind: Node
 metadata:
   name: master02
+spec:
+  disks:
 ---
 apiVersion: longhorn.io/v1beta2
 kind: Node
 metadata:
   name: master03
+spec:
+  disks:
 ---
 apiVersion: longhorn.io/v1beta2
 kind: Node
 metadata:
   name: worker01
+spec:
+  disks:
 ---
 apiVersion: longhorn.io/v1beta2
 kind: Node
 metadata:
   name: worker02
+spec:
+  disks:
