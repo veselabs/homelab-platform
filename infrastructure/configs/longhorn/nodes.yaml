@@ -1,0 +1,31 @@
+---
+apiVersion: longhorn.io/v1beta2
+kind: Node
+metadata:
+  name: master01
+spec:
+  disks:
+    slow:
+      allowScheduling: true
+      path: /var/lib/longhorn-slow
+      tags: ["slow"]
+---
+apiVersion: longhorn.io/v1beta2
+kind: Node
+metadata:
+  name: master02
+---
+apiVersion: longhorn.io/v1beta2
+kind: Node
+metadata:
+  name: master03
+---
+apiVersion: longhorn.io/v1beta2
+kind: Node
+metadata:
+  name: worker01
+---
+apiVersion: longhorn.io/v1beta2
+kind: Node
+metadata:
+  name: worker02
