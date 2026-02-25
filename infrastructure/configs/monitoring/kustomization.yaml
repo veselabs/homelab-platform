@@ -6,3 +6,4 @@ resources:
   - ./alloy
   - ./dashboards
   - ./datasources
+  - ./grafana
