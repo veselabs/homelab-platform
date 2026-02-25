@@ -4,6 +4,4 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ./alloy
-  - ./dashboards
-  - ./datasources
   - ./grafana
