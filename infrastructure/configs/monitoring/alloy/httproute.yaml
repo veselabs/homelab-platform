@@ -25,7 +25,7 @@ spec:
   parentRefs:
     - name: gateway
       namespace: kube-system
-  hostnames: [alloy-otlp.homelab.veselabs.com]
+  hostnames: [telemetry.homelab.veselabs.com]
   rules:
     - backendRefs:
         - name: alloy
@@ -33,4 +33,10 @@ spec:
       matches:
         - path:
             type: PathPrefix
-            value: /v1
+            value: /otlp
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
