@@ -12,3 +12,21 @@ spec:
     - backendRefs:
         - name: alloy
           port: 4317
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: GRPCRoute
+metadata:
+  name: alloy-otlp-telemetry
+spec:
+  parentRefs:
+    - name: gateway
+      namespace: kube-system
+  hostnames: [telemetry.homelab.veselabs.com]
+  rules:
+    - matches:
+        - method:
+            type: RegularExpression
+            service: opentelemetry.proto.collector.*
+      backendRefs:
+        - name: alloy
+          port: 4317
