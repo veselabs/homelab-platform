@@ -1,0 +1,11 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: grafana-postgresql
+spec:
+  instances: 1
+
+  storage:
+    storageClass: longhorn-slow-single
+    size: 1Gi
