@@ -37,12 +37,10 @@ spec:
   valuesFrom:
     - kind: Secret
       name: grafana-admin-user
-      optional: true
       targetPath: adminUser
       valuesKey: username
 
     - kind: Secret
       name: grafana-admin-user
-      optional: true
       targetPath: adminPassword
       valuesKey: password
