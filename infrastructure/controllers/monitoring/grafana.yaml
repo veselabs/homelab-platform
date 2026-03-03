@@ -34,13 +34,23 @@ spec:
       notifiers:
         enabled: true
 
-  valuesFrom:
-    - kind: Secret
-      name: grafana-admin-user
-      targetPath: adminUser
-      valuesKey: username
+    admin:
+      existingSecret: grafana-admin-user
+      userKey: username
+      passwordKey: password
 
-    - kind: Secret
-      name: grafana-admin-user
-      targetPath: adminPassword
-      valuesKey: password
+    extraSecretMounts:
+      - name: grafana-postgresql-app
+        secretName: grafana-postgresql-app
+        defaultMode: 0400
+        mountPath: /var/run/secrets/grafana-postgresql-app
+        readOnly: true
+
+    grafana.ini:
+      database:
+        type: postgres
+        user: $__file{/var/run/secrets/grafana-postgresql-app/user}
+        password: $__file{/var/run/secrets/grafana-postgresql-app/password}
+        host: $__file{/var/run/secrets/grafana-postgresql-app/host}
+        port: $__file{/var/run/secrets/grafana-postgresql-app/port}
+        name: $__file{/var/run/secrets/grafana-postgresql-app/dbname}
