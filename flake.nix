@@ -48,6 +48,7 @@
                 ++ builtins.attrValues {
                   inherit
                     (pkgs)
+                    _1password-cli
                     fluxcd
                     just
                     kubernetes-helm
