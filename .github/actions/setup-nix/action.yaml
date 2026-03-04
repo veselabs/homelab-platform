@@ -13,5 +13,5 @@ runs:
         primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
         restore-prefixes-first-match: nix-${{ runner.os }}-
         purge: true
-        purge-prefixes: nix-${{ runner.os }}-
+        purge-prefixes: nix-${{ runner.os }}-${{ runner.arch }}-
         purge-primary-key: never
