@@ -51,6 +51,7 @@
                     fluxcd
                     just
                     kubernetes-helm
+                    pre-commit
                     ;
                 };
 
