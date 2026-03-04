@@ -2,10 +2,10 @@
   description = "homelab-platform";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     flake-parts.url = "github:hercules-ci/flake-parts/main";
     treefmt-nix.url = "github:numtide/treefmt-nix/main";
-    devenv.url = "github:cachix/devenv/v1.9";
+    devenv.url = "github:cachix/devenv/v2.0";
   };
 
   outputs = inputs @ {flake-parts, ...}:
