@@ -70,11 +70,6 @@
           ];
         };
 
-        packages = {
-          devenv-test = self'.devShells.default.config.test;
-          devenv-up = self'.devShells.default.config.procfileScript;
-        };
-
         formatter = treefmtEval.config.build.wrapper;
         checks.formatting = treefmtEval.config.build.check self;
 
