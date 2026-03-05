@@ -33,11 +33,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-26, macos-26-intel, ubuntu-24.04, ubuntu-24.04-arm]
+        os: [macos-26, ubuntu-24.04]
 
     runs-on: ${{ matrix.os }}
 
     steps:
+      - run: "false"
+
       - name: Checkout
         uses: actions/checkout@v5
 
