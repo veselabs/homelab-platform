@@ -79,6 +79,7 @@ spec:
       drivesPerNode: 1
       persistence:
         storageClass: longhorn-slow-single
+        size: 10Gi
       serviceAccount:
         # Both Mimir and Loki charts use `minio-sa` by default
         name: loki-minio-sa
