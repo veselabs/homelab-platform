@@ -4,29 +4,20 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     flake-parts.url = "github:hercules-ci/flake-parts/main";
-    treefmt-nix.url = "github:numtide/treefmt-nix/main";
     devenv.url = "github:cachix/devenv/v2.0";
+    treefmt-nix.url = "github:numtide/treefmt-nix/main";
+    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {flake-parts, ...}:
-    flake-parts.lib.mkFlake {inherit inputs;} ({self, ...}: {
+    flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["aarch64-darwin" "aarch64-linux" "x86_64-darwin" "x86_64-linux"];
 
       perSystem = {
         pkgs,
-        self',
         system,
         ...
-      }: let
-        treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs {
-          projectRootFile = "flake.nix";
-
-          programs = {
-            alejandra.enable = true;
-            prettier.enable = true;
-          };
-        };
-      in {
+      }: {
         devShells.default = inputs.devenv.lib.mkShell {
           inherit inputs pkgs;
 
@@ -42,27 +33,32 @@
                 shell.enable = true;
               };
 
-              packages =
-                [
-                  self'.formatter
-                ]
-                ++ builtins.attrValues {
-                  inherit
-                    (pkgs)
-                    _1password-cli
-                    fluxcd
-                    just
-                    kubernetes-helm
-                    pre-commit
-                    ;
+              packages = builtins.attrValues {
+                inherit
+                  (pkgs)
+                  _1password-cli
+                  fluxcd
+                  just
+                  kubernetes-helm
+                  pre-commit
+                  ;
+              };
+
+              treefmt = {
+                enable = true;
+                config = {
+                  programs = {
+                    alejandra.enable = true;
+                    prettier.enable = true;
+                  };
                 };
+              };
 
               git-hooks.hooks = {
                 deadnix.enable = true;
                 end-of-file-fixer.enable = true;
                 statix.enable = true;
                 treefmt.enable = true;
-                treefmt.package = self'.formatter;
                 trim-trailing-whitespace.enable = true;
                 yamllint.enable = true;
               };
@@ -70,13 +66,10 @@
           ];
         };
 
-        formatter = treefmtEval.config.build.wrapper;
-        checks.formatting = treefmtEval.config.build.check self;
-
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
           config.allowUnfree = true;
         };
       };
-    });
+    };
 }
