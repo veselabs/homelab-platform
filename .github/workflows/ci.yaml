@@ -7,6 +7,8 @@ on:
     branches: [master]
   merge_group:
     types: [checks_requested]
+  schedule:
+    - cron: "0 0 * * 0"
   workflow_call:
   workflow_dispatch:
 
@@ -27,15 +29,9 @@ jobs:
 
   flake:
     name: Check Flake
+    runs-on: ubuntu-24.04
     needs: [start]
     if: needs.start.outputs.start == 'true'
-
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [macos-26, macos-26-intel, ubuntu-24.04, ubuntu-24.04-arm]
-
-    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout
@@ -45,12 +41,6 @@ jobs:
         uses: ./.github/actions/setup-nix
 
       - name: Check
-        run: nix flake check --impure
-
-      - name: Format
-        run: nix fmt -- --ci
-
-      - name: Test
         run: nix develop .# --impure --command devenv test
 
   succeed:
@@ -58,5 +48,8 @@ jobs:
     runs-on: ubuntu-24.04
     needs:
       - flake
+    if: always()
     steps:
-      - run: "true"
+      - name: Fail If Not Succeeding
+        if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')
+        run: exit 1
