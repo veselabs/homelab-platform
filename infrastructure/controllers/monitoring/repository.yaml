@@ -6,3 +6,11 @@ metadata:
 spec:
   interval: 1m0s
   url: https://grafana.github.io/helm-charts
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: grafana-community
+spec:
+  interval: 1m0s
+  url: https://grafana-community.github.io/helm-charts
