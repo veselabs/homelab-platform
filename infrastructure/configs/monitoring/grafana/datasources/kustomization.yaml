@@ -6,7 +6,8 @@ generatorOptions:
     grafana_datasource: "true"
   disableNameSuffixHash: true
 configMapGenerator:
-  - name: grafana-datasources
-    files:
-      - ./loki.yaml
-      - ./prometheus.yaml
+  - name: grafana-datasource-loki
+    files: [./loki.yaml]
+
+  - name: grafana-datasource-prometheus
+    files: [./prometheus.yaml]
