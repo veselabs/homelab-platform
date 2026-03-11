@@ -9,6 +9,9 @@ configMapGenerator:
   - name: grafana-dashboard.bare-metal.logs.system
     files: [./bare-metal.logs.system.json]
 
+  - name: grafana-dashboard.bare-metal.views.global
+    files: [./bare-metal.views.global.json]
+
   - name: grafana-dashboard.bare-metal.views.nodes
     files: [./bare-metal.views.nodes.json]
 
