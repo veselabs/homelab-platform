@@ -25,7 +25,7 @@ spec:
         - name: radarr
           image: lscr.io/linuxserver/radarr:6.0.4.10291-ls295
           ports:
-            - name: radarr
+            - name: http
               containerPort: 7878
           env:
             - name: PUID
@@ -36,3 +36,23 @@ spec:
         runAsNonRoot: false
         runAsUser: 0
         runAsGroup: 0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: radarr
+  labels:
+    app.kubernetes.io/name: servarr
+    app.kubernetes.io/instance: servarr
+    app.kubernetes.io/component: radarr
+spec:
+  selector:
+    app.kubernetes.io/name: servarr
+    app.kubernetes.io/instance: servarr
+    app.kubernetes.io/component: radarr
+  type: ClusterIP
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: http
