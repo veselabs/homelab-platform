@@ -4,5 +4,6 @@ kind: Kustomization
 namespace: servarr
 resources:
   - ./namespace.yaml
-  - ./radarr.yaml
+  - ./prowlarr.yaml
   - ./pvc.yaml
+  - ./radarr.yaml
