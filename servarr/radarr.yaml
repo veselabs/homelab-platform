@@ -32,10 +32,17 @@ spec:
               value: "1000"
             - name: PGID
               value: "1000"
+          volumeMounts:
+            - name: data
+              mountPath: /data
       securityContext:
         runAsNonRoot: false
         runAsUser: 0
         runAsGroup: 0
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: servarr-data
 ---
 apiVersion: v1
 kind: Service

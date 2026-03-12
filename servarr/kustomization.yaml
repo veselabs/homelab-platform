@@ -5,3 +5,4 @@ namespace: servarr
 resources:
   - ./namespace.yaml
   - ./radarr.yaml
+  - ./pvc.yaml

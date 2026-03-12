@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: servarr-data
+  labels:
+    app.kubernetes.io/name: servarr
+    app.kubernetes.io/instance: servarr
+    app.kubernetes.io/component: data
+spec:
+  storageClassName: longhorn-slow-single
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Gi
