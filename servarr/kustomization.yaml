@@ -6,4 +6,5 @@ resources:
   - ./namespace.yaml
   - ./prowlarr.yaml
   - ./pvc.yaml
+  - ./qbittorrent.yaml
   - ./radarr.yaml

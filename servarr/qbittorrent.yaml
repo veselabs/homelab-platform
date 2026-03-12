@@ -1,0 +1,89 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qbittorrent
+  labels:
+    app.kubernetes.io/name: servarr
+    app.kubernetes.io/instance: servarr
+    app.kubernetes.io/component: qbittorrent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: servarr
+      app.kubernetes.io/instance: servarr
+      app.kubernetes.io/component: qbittorrent
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: servarr
+        app.kubernetes.io/instance: servarr
+        app.kubernetes.io/component: qbittorrent
+    spec:
+      containers:
+        - name: qbittorrent
+          image: lscr.io/linuxserver/qbittorrent:5.1.4-r2-ls444
+          ports:
+            - name: http
+              containerPort: 8080
+            - name: p2p
+              containerPort: 6881
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      securityContext:
+        runAsNonRoot: false
+        runAsUser: 0
+        runAsGroup: 0
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: servarr-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qbittorrent
+  labels:
+    app.kubernetes.io/name: servarr
+    app.kubernetes.io/instance: servarr
+    app.kubernetes.io/component: qbittorrent
+spec:
+  selector:
+    app.kubernetes.io/name: servarr
+    app.kubernetes.io/instance: servarr
+    app.kubernetes.io/component: qbittorrent
+  type: ClusterIP
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: http
+    - name: p2p
+      protocol: TCP
+      port: 6881
+      targetPort: p2p
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: qbittorrent
+spec:
+  parentRefs:
+    - name: gateway
+      namespace: kube-system
+  hostnames: [qbittorrent.homelab.veselabs.com]
+  rules:
+    - backendRefs:
+        - name: qbittorrent
+          port: 80
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
