@@ -1,0 +1,83 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bazarr
+  labels:
+    app.kubernetes.io/name: servarr
+    app.kubernetes.io/instance: servarr
+    app.kubernetes.io/component: bazarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: servarr
+      app.kubernetes.io/instance: servarr
+      app.kubernetes.io/component: bazarr
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: servarr
+        app.kubernetes.io/instance: servarr
+        app.kubernetes.io/component: bazarr
+    spec:
+      containers:
+        - name: bazarr
+          image: lscr.io/linuxserver/bazarr:v1.5.6-ls341
+          ports:
+            - name: http
+              containerPort: 6767
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      securityContext:
+        runAsNonRoot: false
+        runAsUser: 0
+        runAsGroup: 0
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: servarr-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bazarr
+  labels:
+    app.kubernetes.io/name: servarr
+    app.kubernetes.io/instance: servarr
+    app.kubernetes.io/component: bazarr
+spec:
+  selector:
+    app.kubernetes.io/name: servarr
+    app.kubernetes.io/instance: servarr
+    app.kubernetes.io/component: bazarr
+  type: ClusterIP
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: http
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: bazarr
+spec:
+  parentRefs:
+    - name: gateway
+      namespace: kube-system
+  hostnames: [bazarr.homelab.veselabs.com]
+  rules:
+    - backendRefs:
+        - name: bazarr
+          port: 80
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
