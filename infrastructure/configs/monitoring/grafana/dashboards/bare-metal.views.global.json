@@ -189,7 +189,7 @@
               }
             ]
           },
-          "unit": "percent"
+          "unit": "percentunit"
         },
         "overrides": []
       },
@@ -218,9 +218,10 @@
         {
           "editorMode": "code",
           "exemplar": false,
-          "expr": "scalar(node_load1{instance=\"$node\",job=\"$job\"}) * 100 / count(count(node_cpu_seconds_total{instance=\"$node\",job=\"$job\"}) by(cpu))",
+          "expr": "avg(node_load1{job=\"$job\"} / (count without(cpu, mode) (node_cpu_seconds_total{job=\"$job\", mode=\"idle\"})))",
           "format": "time_series",
           "instant": true,
+          "interval": "$resolution",
           "range": false,
           "refId": "A",
           "step": 240
