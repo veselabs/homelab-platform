@@ -272,7 +272,7 @@
               }
             ]
           },
-          "unit": "percent"
+          "unit": "percentunit"
         },
         "overrides": []
       },
@@ -301,8 +301,9 @@
         {
           "editorMode": "code",
           "exemplar": false,
-          "expr": "100 * (1 - avg(rate(node_cpu_seconds_total{mode=\"idle\", instance=\"$node\"}[$__rate_interval])))",
+          "expr": "1 - avg(rate(node_cpu_seconds_total{job=\"$job\", mode=\"idle\"}[$__rate_interval]))",
           "instant": true,
+          "interval": "$resolution",
           "legendFormat": "",
           "range": false,
           "refId": "A",
