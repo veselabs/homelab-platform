@@ -625,6 +625,86 @@
       ],
       "title": "Disk Throughput (SSD)",
       "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${ds_prometheus}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "Bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 21,
+        "y": 0
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.4.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds_prometheus}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(rate(node_disk_read_bytes_total{job=\"$job\"}[$__rate_interval]) * on(device, instance) node_disk_info{job=\"$job\", model=\"ST4000VN006-3CW104\"})",
+          "instant": false,
+          "interval": "$resolution",
+          "legendFormat": "Read",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds_prometheus}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(rate(node_disk_written_bytes_total{job=\"$job\"}[$__rate_interval]) * on(device, instance) node_disk_info{job=\"$job\", model=\"ST4000VN006-3CW104\"})",
+          "instant": false,
+          "interval": "$resolution",
+          "legendFormat": "Write",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Disk Throughput (HDD)",
+      "type": "stat"
     }
   ],
   "preload": false,
