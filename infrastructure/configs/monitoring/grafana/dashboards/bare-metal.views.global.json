@@ -173,7 +173,7 @@
           "max": 1,
           "min": 0,
           "thresholds": {
-            "mode": "absolute",
+            "mode": "percentage",
             "steps": [
               {
                 "color": "rgba(50, 172, 45, 0.97)",
@@ -256,7 +256,7 @@
           "max": 1,
           "min": 0,
           "thresholds": {
-            "mode": "absolute",
+            "mode": "percentage",
             "steps": [
               {
                 "color": "rgba(50, 172, 45, 0.97)",
@@ -329,7 +329,7 @@
           "max": 1,
           "min": 0,
           "thresholds": {
-            "mode": "absolute",
+            "mode": "percentage",
             "steps": [
               {
                 "color": "rgba(50, 172, 45, 0.97)",
