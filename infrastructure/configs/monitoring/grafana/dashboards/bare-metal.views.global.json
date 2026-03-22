@@ -144,7 +144,7 @@
           "step": 240
         }
       ],
-      "title": "Pressure",
+      "title": "Pressure (cluster)",
       "type": "bargauge"
     },
     {
@@ -227,7 +227,7 @@
           "step": 240
         }
       ],
-      "title": "Sys Load",
+      "title": "Sys Load (cluster)",
       "type": "gauge"
     },
     {
@@ -310,7 +310,7 @@
           "step": 240
         }
       ],
-      "title": "CPU Busy",
+      "title": "CPU Busy (cluster)",
       "type": "gauge"
     },
     {
@@ -383,7 +383,7 @@
           "step": 240
         }
       ],
-      "title": "RAM Used",
+      "title": "RAM Used (cluster)",
       "type": "gauge"
     },
     {
@@ -463,7 +463,7 @@
           "refId": "B"
         }
       ],
-      "title": "Network Traffic",
+      "title": "Network Traffic (cluster)",
       "type": "stat"
     },
     {
@@ -543,7 +543,7 @@
           "refId": "B"
         }
       ],
-      "title": "Disk Throughput",
+      "title": "Disk Throughput (cluster)",
       "type": "stat"
     },
     {
