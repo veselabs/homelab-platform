@@ -391,6 +391,7 @@
         "type": "prometheus",
         "uid": "${ds_prometheus}"
       },
+      "description": "Incoming and outgoing network traffic",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -471,6 +472,7 @@
         "type": "prometheus",
         "uid": "${ds_prometheus}"
       },
+      "description": "Disk I/O throughput",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1064,6 +1066,7 @@
         "type": "prometheus",
         "uid": "${ds_prometheus}"
       },
+      "description": "Incoming and outgoing network traffic by host",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1189,6 +1192,7 @@
         "type": "prometheus",
         "uid": "${ds_prometheus}"
       },
+      "description": "Disk I/O throughput by host",
       "fieldConfig": {
         "defaults": {
           "color": {
