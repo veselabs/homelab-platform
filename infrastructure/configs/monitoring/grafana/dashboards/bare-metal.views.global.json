@@ -1567,15 +1567,15 @@
         {
           "id": "renameByRegex",
           "options": {
-            "regex": "(.*) SSDPEMKF256G8 NVMe INTEL 256GB (.*)",
-            "renamePattern": "$1 NVMe $2"
+            "regex": "(.*)SSDPEMKF256G8 NVMe INTEL 256GB(.*)",
+            "renamePattern": "$1NVMe$2"
           }
         },
         {
           "id": "renameByRegex",
           "options": {
-            "regex": "(.*) ST4000VN006-3CW104 (.*)",
-            "renamePattern": "$1 HDD $2"
+            "regex": "(.*)ST4000VN006-3CW104(.*)",
+            "renamePattern": "$1HDD$2"
           }
         }
       ],
@@ -1709,15 +1709,15 @@
         {
           "id": "renameByRegex",
           "options": {
-            "regex": "(.*) SSDPEMKF256G8 NVMe INTEL 256GB (.*)",
-            "renamePattern": "$1 NVMe $2"
+            "regex": "(.*)SSDPEMKF256G8 NVMe INTEL 256GB(.*)",
+            "renamePattern": "$1NVMe$2"
           }
         },
         {
           "id": "renameByRegex",
           "options": {
-            "regex": "(.*) ST4000VN006-3CW104 (.*)",
-            "renamePattern": "$1 HDD $2"
+            "regex": "(.*)ST4000VN006-3CW104(.*)",
+            "renamePattern": "$1HDD$2"
           }
         }
       ],
@@ -1824,15 +1824,15 @@
         {
           "id": "renameByRegex",
           "options": {
-            "regex": "(.*) SSDPEMKF256G8 NVMe INTEL 256GB(.*)",
-            "renamePattern": "$1 NVMe$2"
+            "regex": "(.*)SSDPEMKF256G8 NVMe INTEL 256GB(.*)",
+            "renamePattern": "$1NVMe$2"
           }
         },
         {
           "id": "renameByRegex",
           "options": {
-            "regex": "(.*) ST4000VN006-3CW104(.*)",
-            "renamePattern": "$1 HDD$2"
+            "regex": "(.*)ST4000VN006-3CW104(.*)",
+            "renamePattern": "$1HDD$2"
           }
         }
       ],
