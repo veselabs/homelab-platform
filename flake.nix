@@ -4,9 +4,11 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     flake-parts.url = "github:hercules-ci/flake-parts/main";
-    devenv.url = "github:cachix/devenv/v2.0";
+    devenv.url = "github:cachix/devenv/v2.0.5";
     treefmt-nix.url = "github:numtide/treefmt-nix/main";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
+    git-hooks.url = "github:cachix/git-hooks.nix/master";
+    git-hooks.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {flake-parts, ...}:
