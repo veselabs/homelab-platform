@@ -6,17 +6,41 @@ generatorOptions:
     grafana_dashboard: "true"
   disableNameSuffixHash: true
 configMapGenerator:
-  - name: grafana-dashboards
-    files:
-      - ./bare-metal_logs_system.json
-      - ./bare-metal_views_nodes.json
-      - ./kubernetes_logs_events.json
-      - ./kubernetes_logs_pods.json
-      - ./kubernetes_logs_system.json
-      - ./kubernetes_system_api-server.json
-      - ./kubernetes_system_coredns.json
-      - ./kubernetes_views_global.json
-      - ./kubernetes_views_namespaces.json
-      - ./kubernetes_views_nodes.json
-      - ./kubernetes_views_pods.json
-      - ./proxmox_views_nodes.json
+  - name: grafana-dashboard.bare-metal.logs.system
+    files: [./bare-metal.logs.system.json]
+
+  - name: grafana-dashboard.bare-metal.views.global
+    files: [./bare-metal.views.global.json]
+
+  - name: grafana-dashboard.bare-metal.views.nodes
+    files: [./bare-metal.views.nodes.json]
+
+  - name: grafana-dashboard.kubernetes.logs.events
+    files: [./kubernetes.logs.events.json]
+
+  - name: grafana-dashboard.kubernetes.logs.pods
+    files: [./kubernetes.logs.pods.json]
+
+  - name: grafana-dashboard.kubernetes.logs.system
+    files: [./kubernetes.logs.system.json]
+
+  - name: grafana-dashboard.kubernetes.system.api-server
+    files: [./kubernetes.system.api-server.json]
+
+  - name: grafana-dashboard.kubernetes.system.coredns
+    files: [./kubernetes.system.coredns.json]
+
+  - name: grafana-dashboard.kubernetes.views.global
+    files: [./kubernetes.views.global.json]
+
+  - name: grafana-dashboard.kubernetes.views.namespaces
+    files: [./kubernetes.views.namespaces.json]
+
+  - name: grafana-dashboard.kubernetes.views.nodes
+    files: [./kubernetes.views.nodes.json]
+
+  - name: grafana-dashboard.kubernetes.views.pods
+    files: [./kubernetes.views.pods.json]
+
+  - name: grafana-dashboard.proxmox.views.nodes
+    files: [./proxmox.views.nodes.json]
