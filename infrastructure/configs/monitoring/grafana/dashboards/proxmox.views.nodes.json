@@ -28,7 +28,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 12,
   "links": [],
   "panels": [
     {
@@ -36,7 +35,6 @@
         "type": "prometheus",
         "uid": "prometheus"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -332,7 +330,7 @@
           }
         ]
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -341,7 +339,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(id, name, type) (pve_guest_info{instance=\"$instance\"})",
+          "expr": "sum by(vmid, name, type) (proxmox_vm_uptime_seconds{job=\"proxmox-ve\", node=\"$instance\"})",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -356,9 +354,8 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(id) (pve_up{instance=\"$instance\"} and on(id, instance) pve_guest_info)",
+          "expr": "sum by(vmid) (proxmox_vm_uptime_seconds{job=\"proxmox-ve\", node=\"$instance\"} > bool 0)",
           "format": "table",
-          "hide": false,
           "instant": true,
           "legendFormat": "",
           "range": false,
@@ -371,9 +368,8 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(id) (pve_cpu_usage_limit{instance=\"$instance\"} and on(id, instance) pve_guest_info)",
+          "expr": "sum by(vmid) (proxmox_vm_cpus_ratio{job=\"proxmox-ve\", node=\"$instance\"})",
           "format": "table",
-          "hide": false,
           "instant": true,
           "legendFormat": "",
           "range": false,
@@ -386,9 +382,8 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(id) (pve_memory_size_bytes{instance=\"$instance\"} and on(id, instance) pve_guest_info)",
+          "expr": "sum by(vmid) (proxmox_vm_maxmem_bytes{job=\"proxmox-ve\", node=\"$instance\"})",
           "format": "table",
-          "hide": false,
           "instant": true,
           "legendFormat": "",
           "range": false,
@@ -401,9 +396,8 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(id) (pve_memory_usage_bytes{instance=\"$instance\",template!=\"1\"} / pve_memory_size_bytes and on(id, instance) pve_guest_info and on(id) pve_up==1)",
+          "expr": "sum by(vmid) (proxmox_vm_mem_bytes{job=\"proxmox-ve\", node=\"$instance\"} / proxmox_vm_maxmem_bytes{job=\"proxmox-ve\", node=\"$instance\"} and proxmox_vm_uptime_seconds > 0)",
           "format": "table",
-          "hide": false,
           "instant": true,
           "legendFormat": "",
           "range": false,
@@ -416,9 +410,8 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(id) (pve_disk_size_bytes{instance=\"$instance\"} and on(id, instance) pve_guest_info)",
+          "expr": "sum by(vmid) (proxmox_vm_maxdisk_bytes{job=\"proxmox-ve\", node=\"$instance\"})",
           "format": "table",
-          "hide": false,
           "instant": true,
           "legendFormat": "",
           "range": false,
@@ -431,9 +424,8 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(id) (pve_disk_usage_bytes{instance=\"$instance\"} / pve_disk_size_bytes and on(id, instance) pve_guest_info{type=\"lxc\"})",
+          "expr": "sum by(vmid) (proxmox_vm_disk_bytes{job=\"proxmox-ve\", node=\"$instance\", type=\"lxc\"} / proxmox_vm_maxdisk_bytes{job=\"proxmox-ve\", node=\"$instance\", type=\"lxc\"})",
           "format": "table",
-          "hide": false,
           "instant": true,
           "legendFormat": "",
           "range": false,
@@ -445,7 +437,7 @@
         {
           "id": "joinByField",
           "options": {
-            "byField": "id",
+            "byField": "vmid",
             "mode": "outer"
           }
         },
@@ -462,19 +454,18 @@
               "Time 7": true,
               "Value #id, name and type": true
             },
+            "includeByName": {},
             "indexByName": {},
             "renameByName": {
-              "Time 5": "",
               "Value #disksize": "Disk",
               "Value #diskusg_percent": "Disk usage (%)",
-              "Value #id, name and type": "",
               "Value #memsize": "Memory",
               "Value #memusg_percent": "Memory usage (%)",
               "Value #status": "Status",
               "Value #vcpus": "vCPUs",
-              "id": "ID",
               "name": "Name",
-              "type": "Type"
+              "type": "Type",
+              "vmid": "ID"
             }
           }
         }
@@ -569,7 +560,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -591,7 +582,6 @@
         "type": "prometheus",
         "uid": "prometheus"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -653,7 +643,7 @@
         "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -737,7 +727,7 @@
         "textMode": "value_and_name",
         "wideLayout": true
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -844,7 +834,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -866,7 +856,6 @@
           "exemplar": false,
           "expr": "proxmox_node_memory_memtotal_bytes{job=\"proxmox-ve\", node=\"$instance\"}",
           "format": "table",
-          "hide": false,
           "instant": true,
           "legendFormat": "__auto",
           "range": false,
@@ -895,7 +884,6 @@
         "type": "prometheus",
         "uid": "prometheus"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -957,7 +945,7 @@
         "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -983,7 +971,6 @@
         "type": "prometheus",
         "uid": "prometheus"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1069,7 +1056,7 @@
         "textMode": "value_and_name",
         "wideLayout": true
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -1094,7 +1081,6 @@
           "exemplar": false,
           "expr": "proxmox_node_memory_memtotal_bytes{job=\"proxmox-ve\", node=\"$instance\"}",
           "format": "table",
-          "hide": false,
           "instant": true,
           "legendFormat": "__auto",
           "range": false,
@@ -1109,7 +1095,6 @@
           "exemplar": false,
           "expr": "proxmox_node_memory_memtotal_bytes{job=\"proxmox-ve\", node=\"$instance\"}",
           "format": "table",
-          "hide": false,
           "instant": true,
           "legendFormat": "__auto",
           "range": false,
@@ -1219,7 +1204,7 @@
           "sort": "asc"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -1325,7 +1310,7 @@
           "sort": "desc"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -1437,7 +1422,6 @@
         "type": "prometheus",
         "uid": "prometheus"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1647,7 +1631,6 @@
         "type": "prometheus",
         "uid": "prometheus"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1779,7 +1762,6 @@
         "type": "prometheus",
         "uid": "prometheus"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1907,6 +1889,7 @@
         },
         "refresh": 2,
         "regex": "",
+        "regexApplyTo": "value",
         "sort": 1,
         "type": "query"
       }
@@ -1917,8 +1900,9 @@
     "to": "now"
   },
   "timepicker": {},
-  "timezone": "",
+  "timezone": "browser",
   "title": "Proxmox / Views / Nodes",
   "uid": "Dp7Cd57Zza",
-  "version": 1
+  "version": 1,
+  "weekStart": ""
 }
