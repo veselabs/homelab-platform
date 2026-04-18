@@ -755,7 +755,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "palette-classic"
           },
           "custom": {
             "axisBorderShow": false,
@@ -767,7 +767,7 @@
             "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
-            "gradientMode": "scheme",
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
@@ -792,6 +792,7 @@
             }
           },
           "mappings": [],
+          "max": 1,
           "min": 0,
           "thresholds": {
             "mode": "percentage",
@@ -810,7 +811,7 @@
               }
             ]
           },
-          "unit": "bytes"
+          "unit": "percentunit"
         },
         "overrides": []
       },
@@ -826,7 +827,7 @@
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": false
+          "showLegend": true
         },
         "tooltip": {
           "hideZeros": false,
@@ -842,41 +843,13 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "proxmox_node_memory_memused_bytes{job=\"proxmox-ve\", node=\"$instance\"}",
-          "legendFormat": "__auto",
+          "expr": "proxmox_node_memory_memused_bytes{job=\"proxmox-ve\"} / proxmox_node_memory_memtotal_bytes{job=\"proxmox-ve\"}",
+          "legendFormat": "{{node}}",
           "range": true,
-          "refId": "usage"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "proxmox_node_memory_memtotal_bytes{job=\"proxmox-ve\", node=\"$instance\"}",
-          "format": "table",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "total"
+          "refId": "A"
         }
       ],
       "title": "Memory history",
-      "transformations": [
-        {
-          "id": "configFromData",
-          "options": {
-            "configRefId": "total",
-            "mappings": [
-              {
-                "fieldName": "Value",
-                "handlerKey": "max"
-              }
-            ]
-          }
-        }
-      ],
       "type": "timeseries"
     },
     {
