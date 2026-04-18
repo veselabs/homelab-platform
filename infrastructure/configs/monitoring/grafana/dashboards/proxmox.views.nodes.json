@@ -339,7 +339,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(vmid, name, type) (proxmox_vm_uptime_seconds{job=\"proxmox-ve\", node=\"$instance\"})",
+          "expr": "sum by(vmid, name, type) (proxmox_vm_uptime_seconds{job=\"proxmox-ve\"})",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -354,7 +354,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(vmid) (proxmox_vm_uptime_seconds{job=\"proxmox-ve\", node=\"$instance\"} > bool 0)",
+          "expr": "sum by(vmid) (proxmox_vm_uptime_seconds{job=\"proxmox-ve\"} > bool 0)",
           "format": "table",
           "instant": true,
           "legendFormat": "",
@@ -368,7 +368,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(vmid) (proxmox_vm_cpus_ratio{job=\"proxmox-ve\", node=\"$instance\"})",
+          "expr": "sum by(vmid) (proxmox_vm_cpus_ratio{job=\"proxmox-ve\"})",
           "format": "table",
           "instant": true,
           "legendFormat": "",
@@ -382,7 +382,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(vmid) (proxmox_vm_maxmem_bytes{job=\"proxmox-ve\", node=\"$instance\"})",
+          "expr": "sum by(vmid) (proxmox_vm_maxmem_bytes{job=\"proxmox-ve\"})",
           "format": "table",
           "instant": true,
           "legendFormat": "",
@@ -396,7 +396,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(vmid) (proxmox_vm_mem_bytes{job=\"proxmox-ve\", node=\"$instance\"} / proxmox_vm_maxmem_bytes{job=\"proxmox-ve\", node=\"$instance\"} and proxmox_vm_uptime_seconds > 0)",
+          "expr": "sum by(vmid) (proxmox_vm_mem_bytes{job=\"proxmox-ve\"} / proxmox_vm_maxmem_bytes{job=\"proxmox-ve\"} and proxmox_vm_uptime_seconds > 0)",
           "format": "table",
           "instant": true,
           "legendFormat": "",
@@ -410,7 +410,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(vmid) (proxmox_vm_maxdisk_bytes{job=\"proxmox-ve\", node=\"$instance\"})",
+          "expr": "sum by(vmid) (proxmox_vm_maxdisk_bytes{job=\"proxmox-ve\"})",
           "format": "table",
           "instant": true,
           "legendFormat": "",
@@ -424,7 +424,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(vmid) (proxmox_vm_disk_bytes{job=\"proxmox-ve\", node=\"$instance\", type=\"lxc\"} / proxmox_vm_maxdisk_bytes{job=\"proxmox-ve\", node=\"$instance\", type=\"lxc\"})",
+          "expr": "sum by(vmid) (proxmox_vm_disk_bytes{job=\"proxmox-ve\", type=\"lxc\"} / proxmox_vm_maxdisk_bytes{job=\"proxmox-ve\", type=\"lxc\"})",
           "format": "table",
           "instant": true,
           "legendFormat": "",
@@ -1723,7 +1723,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -1842,7 +1842,7 @@
           "sort": "desc"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
