@@ -1396,7 +1396,7 @@
         "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -1479,7 +1479,7 @@
         },
         "valueMode": "color"
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -1606,7 +1606,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -1901,7 +1901,7 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Proxmox / Views / Nodes",
+  "title": "Proxmox / Views / Global",
   "uid": "Dp7Cd57Zza",
   "version": 1,
   "weekStart": ""
