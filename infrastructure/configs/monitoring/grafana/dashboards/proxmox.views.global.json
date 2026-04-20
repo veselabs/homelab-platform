@@ -96,7 +96,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 73
+                "value": 75
               }
             ]
           },
@@ -128,7 +128,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 82
+                "value": 100
               }
             ]
           },
@@ -199,7 +199,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 143
+                "value": 150
               }
             ]
           },
@@ -266,7 +266,7 @@
               },
               {
                 "id": "custom.width",
-                "value": 120
+                "value": 125
               },
               {
                 "id": "unit",
@@ -282,7 +282,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 66
+                "value": 75
               }
             ]
           },
@@ -294,7 +294,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 67
+                "value": 75
               }
             ]
           },
@@ -306,7 +306,19 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 106
+                "value": 100
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Node"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 100
               }
             ]
           }
@@ -339,7 +351,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(vmid, name, type) (proxmox_vm_uptime_seconds{job=\"proxmox-ve\"})",
+          "expr": "sum by(vmid, node, name, type) (proxmox_vm_uptime_seconds{job=\"proxmox-ve\"})",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -455,7 +467,26 @@
               "Value #id, name and type": true
             },
             "includeByName": {},
-            "indexByName": {},
+            "indexByName": {
+              "Time 1": 1,
+              "Time 2": 6,
+              "Time 3": 8,
+              "Time 4": 10,
+              "Time 5": 12,
+              "Time 6": 14,
+              "Time 7": 16,
+              "Value #disksize": 15,
+              "Value #diskusg_percent": 17,
+              "Value #id, name and type": 5,
+              "Value #memsize": 11,
+              "Value #memusg_percent": 13,
+              "Value #status": 7,
+              "Value #vcpus": 9,
+              "name": 3,
+              "node": 2,
+              "type": 4,
+              "vmid": 0
+            },
             "renameByName": {
               "Value #disksize": "Disk",
               "Value #diskusg_percent": "Disk usage (%)",
@@ -464,6 +495,7 @@
               "Value #status": "Status",
               "Value #vcpus": "vCPUs",
               "name": "Name",
+              "node": "Node",
               "type": "Type",
               "vmid": "ID"
             }
