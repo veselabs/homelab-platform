@@ -33,6 +33,8 @@ spec:
             - name: PGID
               value: "1000"
           volumeMounts:
+            - name: bazarr-config
+              mountPath: /config
             - name: data
               mountPath: /data
       securityContext:
@@ -40,9 +42,28 @@ spec:
         runAsUser: 0
         runAsGroup: 0
       volumes:
+        - name: bazarr-config
+          persistentVolumeClaim:
+            claimName: bazarr-config
         - name: data
           persistentVolumeClaim:
             claimName: servarr-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: bazarr-config
+  labels:
+    app.kubernetes.io/name: servarr
+    app.kubernetes.io/instance: servarr
+    app.kubernetes.io/component: bazarr
+spec:
+  storageClassName: longhorn-slow-single
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
 ---
 apiVersion: v1
 kind: Service
