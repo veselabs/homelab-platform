@@ -42,5 +42,5 @@ configMapGenerator:
   - name: grafana-dashboard.kubernetes.views.pods
     files: [./kubernetes.views.pods.json]
 
-  - name: grafana-dashboard.proxmox.views.nodes
-    files: [./proxmox.views.nodes.json]
+  - name: grafana-dashboard.proxmox.views.global
+    files: [./proxmox.views.global.json]
