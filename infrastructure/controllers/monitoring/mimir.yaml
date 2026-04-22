@@ -23,7 +23,7 @@ spec:
     minio:
       persistence:
         storageClass: longhorn-slow-single
-        size: 60Gi
+        size: 120Gi
       serviceAccount:
         # Both Mimir and Loki charts use `minio-sa` by default
         name: mimir-minio-sa
