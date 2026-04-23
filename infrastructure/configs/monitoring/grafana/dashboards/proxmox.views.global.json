@@ -1869,7 +1869,7 @@
     }
   ],
   "preload": false,
-  "refresh": "10s",
+  "refresh": "1m",
   "schemaVersion": 42,
   "tags": ["Proxmox", "Prometheus"],
   "templating": {
@@ -1901,7 +1901,7 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
