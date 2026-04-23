@@ -1217,11 +1217,11 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "proxmox_vm_cpu_percent{job=\"proxmox-ve\", node=\"$instance\"} and proxmox_vm_uptime_seconds > 0",
+          "expr": "proxmox_vm_cpu_percent{job=\"proxmox-ve\"} and proxmox_vm_uptime_seconds > 0",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 4,
-          "legendFormat": "{{name}} ({{type}})",
+          "legendFormat": "{{node}} - {{name}} ({{type}})",
           "range": true,
           "refId": "A"
         }
@@ -1323,11 +1323,11 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "proxmox_vm_mem_bytes{job=\"proxmox-ve\", node=\"$instance\"} / proxmox_vm_maxmem_bytes{job=\"proxmox-ve\", node=\"$instance\"} and proxmox_vm_uptime_seconds > 0",
+          "expr": "proxmox_vm_mem_bytes{job=\"proxmox-ve\"} / proxmox_vm_maxmem_bytes{job=\"proxmox-ve\"} and proxmox_vm_uptime_seconds > 0",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 4,
-          "legendFormat": "{{name}} ({{type}})",
+          "legendFormat": "{{node}} - {{name}} ({{type}})",
           "range": true,
           "refId": "A"
         }
@@ -1619,11 +1619,11 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "proxmox_vm_disk_bytes{job=\"proxmox-ve\", node=\"$instance\", type=\"lxc\"} / proxmox_vm_maxdisk_bytes{job=\"proxmox-ve\", node=\"$instance\", type=\"lxc\"}",
+          "expr": "proxmox_vm_disk_bytes{job=\"proxmox-ve\", type=\"lxc\"} / proxmox_vm_maxdisk_bytes{job=\"proxmox-ve\", type=\"lxc\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{name}} ({{type}})",
+          "legendFormat": "{{node}} - {{name}} ({{type}})",
           "range": true,
           "refId": "A"
         }
@@ -1736,11 +1736,11 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "rate(proxmox_vm_netin_bytes_total{job=\"proxmox-ve\", node=\"$instance\"}[5m]) and proxmox_vm_uptime_seconds > 0",
+          "expr": "rate(proxmox_vm_netin_bytes_total{job=\"proxmox-ve\"}[5m]) and proxmox_vm_uptime_seconds > 0",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 3,
-          "legendFormat": "{{name}} RECV ({{type}})",
+          "legendFormat": "{{node}} - {{name}} RECV ({{type}})",
           "range": true,
           "refId": "A"
         },
@@ -1750,11 +1750,11 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "rate(proxmox_vm_netout_bytes_total{job=\"proxmox-ve\", node=\"$instance\"}[5m]) and proxmox_vm_uptime_seconds > 0",
+          "expr": "rate(proxmox_vm_netout_bytes_total{job=\"proxmox-ve\"}[5m]) and proxmox_vm_uptime_seconds > 0",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 3,
-          "legendFormat": "{{name}} SEND ({{type}})",
+          "legendFormat": "{{node}} - {{name}} SEND ({{type}})",
           "range": true,
           "refId": "B"
         }
@@ -1855,11 +1855,11 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "rate(proxmox_vm_diskwrite_bytes_total{job=\"proxmox-ve\", node=\"$instance\"}[5m]) + rate(proxmox_vm_diskread_bytes_total{job=\"proxmox-ve\", node=\"$instance\"}[5m]) and proxmox_vm_uptime_seconds > 0",
+          "expr": "rate(proxmox_vm_diskwrite_bytes_total{job=\"proxmox-ve\"}[5m]) + rate(proxmox_vm_diskread_bytes_total{job=\"proxmox-ve\"}[5m]) and proxmox_vm_uptime_seconds > 0",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{name}} ({{type}})",
+          "legendFormat": "{{node}} - {{name}} ({{type}})",
           "range": true,
           "refId": "A"
         }
