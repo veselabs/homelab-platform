@@ -56,3 +56,6 @@ spec:
         enabled: false
       persistentVolume:
         storageClass: longhorn-slow-single
+
+    rollout_operator:
+      enabled: false
