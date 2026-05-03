@@ -40,7 +40,7 @@ spec:
     compactor:
       persistentVolume:
         storageClass: longhorn-slow-single
-        size: 6Gi
+        size: 12Gi
 
     ingester:
       replicas: 3
