@@ -1,0 +1,15 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: descheduler
+spec:
+  chart:
+    spec:
+      version: 0.35.1
+      chart: descheduler
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: descheduler
+  interval: 1m0s
