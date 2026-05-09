@@ -2288,7 +2288,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 4,
-          "legendFormat": "{{node}} - {{name}} ({{type}}) CPU",
+          "legendFormat": "{{node}} - {{name}} CPU ({{type}})",
           "range": true,
           "refId": "A"
         },
@@ -2302,7 +2302,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 4,
-          "legendFormat": "{{node}} - {{name}} ({{type}}) Mem",
+          "legendFormat": "{{node}} - {{name}} Mem ({{type}})",
           "range": true,
           "refId": "B"
         },
@@ -2316,7 +2316,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 4,
-          "legendFormat": "{{node}} - {{name}} ({{type}}) I/O",
+          "legendFormat": "{{node}} - {{name}} I/O ({{type}})",
           "range": true,
           "refId": "C"
         }
@@ -2550,7 +2550,7 @@
             "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
-            "axisLabel": "",
+            "axisLabel": "transmit (-) / receive (+)",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "barWidthFactor": 0.6,
@@ -2614,17 +2614,17 @@
         ]
       },
       "gridPos": {
-        "h": 10,
-        "w": 24,
+        "h": 8,
+        "w": 8,
         "x": 0,
         "y": 35
       },
       "id": 13,
       "options": {
         "legend": {
-          "calcs": ["max", "mean", "lastNotNull", "sum"],
-          "displayMode": "table",
-          "placement": "right",
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
           "showLegend": true
         },
         "tooltip": {
@@ -2664,7 +2664,7 @@
           "refId": "B"
         }
       ],
-      "title": "Network IO/s",
+      "title": "Network Traffic (by guest)",
       "type": "timeseries"
     },
     {
@@ -2681,7 +2681,7 @@
             "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
-            "axisLabel": "",
+            "axisLabel": "write (-) / read (+)",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "barWidthFactor": 0.6,
@@ -2714,7 +2714,6 @@
           "decimals": 0,
           "links": [],
           "mappings": [],
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -2730,20 +2729,33 @@
           },
           "unit": "Bps"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
-        "w": 24,
-        "x": 0,
-        "y": 45
+        "w": 8,
+        "x": 8,
+        "y": 35
       },
       "id": 12,
       "options": {
         "legend": {
-          "calcs": ["max", "mean", "lastNotNull"],
-          "displayMode": "table",
-          "placement": "right",
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
           "showLegend": true
         },
         "tooltip": {
@@ -2760,16 +2772,30 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "rate(proxmox_vm_diskwrite_bytes_total{job=\"proxmox-ve\"}[5m]) + rate(proxmox_vm_diskread_bytes_total{job=\"proxmox-ve\"}[5m]) and proxmox_vm_uptime_seconds > 0",
+          "expr": "rate(proxmox_vm_diskread_bytes_total{job=\"proxmox-ve\"}[5m]) and proxmox_vm_uptime_seconds > 0",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{node}} - {{name}} ({{type}})",
+          "legendFormat": "{{node}} - {{name}} Read ({{type}})",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "rate(proxmox_vm_diskwrite_bytes_total{job=\"proxmox-ve\"}[5m]) and proxmox_vm_uptime_seconds > 0",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "{{node}} - {{name}} Write ({{type}})",
+          "range": true,
+          "refId": "B"
         }
       ],
-      "title": "Disk IO/s",
+      "title": "Disk Throughput (by guest)",
       "type": "timeseries"
     },
     {
@@ -2843,17 +2869,17 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
-        "w": 24,
-        "x": 0,
-        "y": 53
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 35
       },
       "id": 9,
       "options": {
         "legend": {
-          "calcs": ["lastNotNull"],
-          "displayMode": "table",
-          "placement": "right",
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
           "showLegend": true
         },
         "tooltip": {
@@ -2879,7 +2905,7 @@
           "refId": "A"
         }
       ],
-      "title": "LXC guests Disk usage",
+      "title": "Disk Used (by guest)",
       "type": "timeseries"
     }
   ],
@@ -2923,6 +2949,6 @@
   "timezone": "browser",
   "title": "Proxmox / Views / Global",
   "uid": "Dp7Cd57Zza",
-  "version": 7,
+  "version": 1,
   "weekStart": ""
 }
