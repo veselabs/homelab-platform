@@ -1931,6 +1931,77 @@
           {
             "matcher": {
               "id": "byName",
+              "options": "CPU usage (%)"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "from": 0,
+                      "result": {
+                        "color": "green",
+                        "index": 0
+                      },
+                      "to": 0.75
+                    },
+                    "type": "range"
+                  },
+                  {
+                    "options": {
+                      "from": 0.75,
+                      "result": {
+                        "color": "orange",
+                        "index": 1
+                      },
+                      "to": 0.9
+                    },
+                    "type": "range"
+                  },
+                  {
+                    "options": {
+                      "from": 0.9,
+                      "result": {
+                        "color": "dark-red",
+                        "index": 2
+                      },
+                      "to": 2
+                    },
+                    "type": "range"
+                  },
+                  {
+                    "options": {
+                      "match": "null",
+                      "result": {
+                        "color": "#808080",
+                        "index": 3,
+                        "text": "n/a"
+                      }
+                    },
+                    "type": "special"
+                  }
+                ]
+              },
+              {
+                "id": "custom.width",
+                "value": 150
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
               "options": "Memory usage (%)"
             },
             "properties": [
@@ -2192,6 +2263,21 @@
           },
           "editorMode": "code",
           "exemplar": false,
+          "expr": "sum by(vmid) (proxmox_vm_cpu_percent{job=\"$job\"} and proxmox_vm_uptime_seconds > 0)",
+          "format": "table",
+          "instant": true,
+          "interval": "$resolution",
+          "legendFormat": "",
+          "range": false,
+          "refId": "cpuusg_percent"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${ds_prometheus}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
           "expr": "sum by(vmid) (proxmox_vm_maxmem_bytes{job=\"$job\"})",
           "format": "table",
           "instant": true,
@@ -2266,6 +2352,7 @@
               "Time 5": true,
               "Time 6": true,
               "Time 7": true,
+              "Time 8": true,
               "Value #id, name and type": true
             },
             "includeByName": {},
@@ -2277,11 +2364,13 @@
               "Time 5": 12,
               "Time 6": 14,
               "Time 7": 16,
-              "Value #disksize": 15,
-              "Value #diskusg_percent": 17,
+              "Time 8": 18,
+              "Value #cpuusg_percent": 11,
+              "Value #disksize": 17,
+              "Value #diskusg_percent": 19,
               "Value #id, name and type": 5,
-              "Value #memsize": 11,
-              "Value #memusg_percent": 13,
+              "Value #memsize": 13,
+              "Value #memusg_percent": 15,
               "Value #status": 7,
               "Value #vcpus": 9,
               "name": 3,
@@ -2290,6 +2379,7 @@
               "vmid": 0
             },
             "renameByName": {
+              "Value #cpuusg_percent": "CPU usage (%)",
               "Value #disksize": "Disk",
               "Value #diskusg_percent": "Disk usage (%)",
               "Value #memsize": "Memory",
