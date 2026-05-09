@@ -33,7 +33,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${ds_prometheus}"
       },
       "fieldConfig": {
         "defaults": {
@@ -101,13 +101,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(proxmox_node_cpustat_cpu_percent{job=\"proxmox-ve\"})",
+          "expr": "avg(proxmox_node_cpustat_cpu_percent{job=\"$job\"})",
           "format": "time_series",
           "instant": true,
+          "interval": "$resolution",
           "intervalFactor": 1,
           "legendFormat": "__auto",
           "range": false,
@@ -120,7 +121,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${ds_prometheus}"
       },
       "fieldConfig": {
         "defaults": {
@@ -188,13 +189,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(proxmox_node_memory_memused_bytes{job=\"proxmox-ve\"} / proxmox_node_memory_memtotal_bytes{job=\"proxmox-ve\"})",
+          "expr": "avg(proxmox_node_memory_memused_bytes{job=\"$job\"} / proxmox_node_memory_memtotal_bytes{job=\"$job\"})",
           "format": "time_series",
           "instant": true,
+          "interval": "$resolution",
           "intervalFactor": 1,
           "legendFormat": "",
           "range": false,
@@ -207,7 +209,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${ds_prometheus}"
       },
       "description": "Incoming and outgoing network traffic",
       "fieldConfig": {
@@ -260,9 +262,9 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(rate(proxmox_node_network_receive_bytes_total{job=\"proxmox-ve\", device=\"eno1\"}[$__rate_interval]))",
+          "expr": "sum(rate(proxmox_node_network_receive_bytes_total{job=\"$job\", device=\"eno1\"}[$__rate_interval]))",
           "instant": false,
-          "interval": "",
+          "interval": "$resolution",
           "legendFormat": "Receive",
           "range": true,
           "refId": "A"
@@ -274,9 +276,9 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(rate(proxmox_node_network_transmit_bytes_total{job=\"proxmox-ve\", device=\"eno1\"}[$__rate_interval]))",
+          "expr": "sum(rate(proxmox_node_network_transmit_bytes_total{job=\"$job\", device=\"eno1\"}[$__rate_interval]))",
           "instant": false,
-          "interval": "",
+          "interval": "$resolution",
           "legendFormat": "Transmit",
           "range": true,
           "refId": "B"
@@ -288,7 +290,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${ds_prometheus}"
       },
       "fieldConfig": {
         "defaults": {
@@ -355,14 +357,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "avg(proxmox_storage_used_bytes{job=\"proxmox-ve\", storage=\"local\"} / proxmox_storage_total_bytes{job=\"proxmox-ve\"})",
+          "expr": "avg(proxmox_storage_used_bytes{job=\"$job\", storage=\"local\"} / proxmox_storage_total_bytes{job=\"$job\"})",
           "format": "time_series",
           "instant": true,
-          "interval": "",
+          "interval": "$resolution",
           "intervalFactor": 1,
           "legendFormat": "{{storage}}",
           "refId": "A"
@@ -374,7 +376,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${ds_prometheus}"
       },
       "fieldConfig": {
         "defaults": {
@@ -441,14 +443,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": true,
           "expr": "proxmox_storage_",
           "format": "time_series",
           "instant": true,
-          "interval": "",
+          "interval": "$resolution",
           "intervalFactor": 1,
           "legendFormat": "{{storage}}",
           "refId": "A"
@@ -460,7 +462,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${ds_prometheus}"
       },
       "fieldConfig": {
         "defaults": {
@@ -527,14 +529,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "avg(proxmox_storage_used_bytes{job=\"proxmox-ve\", storage=\"slow-zfs\"} / proxmox_storage_total_bytes{job=\"proxmox-ve\"})",
+          "expr": "avg(proxmox_storage_used_bytes{job=\"$job\", storage=\"slow-zfs\"} / proxmox_storage_total_bytes{job=\"$job\"})",
           "format": "time_series",
           "instant": true,
-          "interval": "",
+          "interval": "$resolution",
           "intervalFactor": 1,
           "legendFormat": "{{storage}}",
           "refId": "A"
@@ -545,7 +547,8 @@
     },
     {
       "datasource": {
-        "uid": "prometheus"
+        "type": "prometheus",
+        "uid": "${ds_prometheus}"
       },
       "fieldConfig": {
         "defaults": {
@@ -591,7 +594,8 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "count(proxmox_vm_uptime_seconds{job=\"proxmox-ve\"} > 0)",
+          "expr": "count(proxmox_vm_uptime_seconds{job=\"$job\"} > 0)",
+          "interval": "$resolution",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -602,7 +606,8 @@
     },
     {
       "datasource": {
-        "uid": "prometheus"
+        "type": "prometheus",
+        "uid": "${ds_prometheus}"
       },
       "fieldConfig": {
         "defaults": {
@@ -648,7 +653,8 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "count(proxmox_node_uptime_seconds{job=\"proxmox-ve\"} > 0)",
+          "expr": "count(proxmox_node_uptime_seconds{job=\"$job\"} > 0)",
+          "interval": "$resolution",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -660,7 +666,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${ds_prometheus}"
       },
       "fieldConfig": {
         "defaults": {
@@ -725,13 +731,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(proxmox_node_cpustat_cpus_percent{job=\"proxmox-ve\"})",
+          "expr": "sum(proxmox_node_cpustat_cpus_percent{job=\"$job\"})",
           "format": "table",
           "instant": true,
+          "interval": "$resolution",
           "legendFormat": "__auto",
           "range": false,
           "refId": "A"
@@ -743,7 +750,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${ds_prometheus}"
       },
       "fieldConfig": {
         "defaults": {
@@ -835,13 +842,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(proxmox_node_memory_memused_bytes{job=\"proxmox-ve\"})",
+          "expr": "sum(proxmox_node_memory_memused_bytes{job=\"$job\"})",
           "format": "table",
           "instant": true,
+          "interval": "$resolution",
           "legendFormat": "__auto",
           "range": false,
           "refId": "used"
@@ -849,13 +857,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(proxmox_node_memory_memtotal_bytes{job=\"proxmox-ve\"})",
+          "expr": "sum(proxmox_node_memory_memtotal_bytes{job=\"$job\"})",
           "format": "table",
           "instant": true,
+          "interval": "$resolution",
           "legendFormat": "__auto",
           "range": false,
           "refId": "total"
@@ -863,13 +872,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(proxmox_node_memory_memtotal_bytes{job=\"proxmox-ve\"})",
+          "expr": "sum(proxmox_node_memory_memtotal_bytes{job=\"$job\"})",
           "format": "table",
           "instant": true,
+          "interval": "$resolution",
           "legendFormat": "__auto",
           "range": false,
           "refId": "total_for_max"
@@ -895,7 +905,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${ds_prometheus}"
       },
       "fieldConfig": {
         "defaults": {
@@ -987,13 +997,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(proxmox_storage_used_bytes{job=\"proxmox-ve\", storage=\"local\"})",
+          "expr": "sum(proxmox_storage_used_bytes{job=\"$job\", storage=\"local\"})",
           "format": "table",
           "instant": true,
+          "interval": "$resolution",
           "legendFormat": "__auto",
           "range": false,
           "refId": "used"
@@ -1001,13 +1012,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(proxmox_storage_total_bytes{job=\"proxmox-ve\", storage=\"local\"})",
+          "expr": "sum(proxmox_storage_total_bytes{job=\"$job\", storage=\"local\"})",
           "format": "table",
           "instant": true,
+          "interval": "$resolution",
           "legendFormat": "__auto",
           "range": false,
           "refId": "total"
@@ -1015,13 +1027,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(proxmox_storage_total_bytes{job=\"proxmox-ve\", storage=\"local\"})",
+          "expr": "sum(proxmox_storage_total_bytes{job=\"$job\", storage=\"local\"})",
           "format": "table",
           "instant": true,
+          "interval": "$resolution",
           "legendFormat": "__auto",
           "range": false,
           "refId": "total_for_max"
@@ -1047,7 +1060,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${ds_prometheus}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1139,13 +1152,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(proxmox_storage_used_bytes{job=\"proxmox-ve\", storage=\"local-zfs\"})",
+          "expr": "sum(proxmox_storage_used_bytes{job=\"$job\", storage=\"local-zfs\"})",
           "format": "table",
           "instant": true,
+          "interval": "$resolution",
           "legendFormat": "__auto",
           "range": false,
           "refId": "used"
@@ -1153,13 +1167,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(proxmox_storage_total_bytes{job=\"proxmox-ve\", storage=\"local-zfs\"})",
+          "expr": "sum(proxmox_storage_total_bytes{job=\"$job\", storage=\"local-zfs\"})",
           "format": "table",
           "instant": true,
+          "interval": "$resolution",
           "legendFormat": "__auto",
           "range": false,
           "refId": "total"
@@ -1167,13 +1182,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(proxmox_storage_total_bytes{job=\"proxmox-ve\", storage=\"local-zfs\"})",
+          "expr": "sum(proxmox_storage_total_bytes{job=\"$job\", storage=\"local-zfs\"})",
           "format": "table",
           "instant": true,
+          "interval": "$resolution",
           "legendFormat": "__auto",
           "range": false,
           "refId": "total_for_max"
@@ -1199,7 +1215,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${ds_prometheus}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1291,13 +1307,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(proxmox_storage_used_bytes{job=\"proxmox-ve\", storage=\"slow-zfs\"})",
+          "expr": "sum(proxmox_storage_used_bytes{job=\"$job\", storage=\"slow-zfs\"})",
           "format": "table",
           "instant": true,
+          "interval": "$resolution",
           "legendFormat": "__auto",
           "range": false,
           "refId": "used"
@@ -1305,13 +1322,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(proxmox_storage_total_bytes{job=\"proxmox-ve\", storage=\"slow-zfs\"})",
+          "expr": "sum(proxmox_storage_total_bytes{job=\"$job\", storage=\"slow-zfs\"})",
           "format": "table",
           "instant": true,
+          "interval": "$resolution",
           "legendFormat": "__auto",
           "range": false,
           "refId": "total"
@@ -1319,13 +1337,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(proxmox_storage_total_bytes{job=\"proxmox-ve\", storage=\"slow-zfs\"})",
+          "expr": "sum(proxmox_storage_total_bytes{job=\"$job\", storage=\"slow-zfs\"})",
           "format": "table",
           "instant": true,
+          "interval": "$resolution",
           "legendFormat": "__auto",
           "range": false,
           "refId": "total_for_max"
@@ -1351,7 +1370,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${ds_prometheus}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1441,10 +1460,11 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
-          "expr": "proxmox_node_cpustat_cpu_percent{job=\"proxmox-ve\"}",
+          "expr": "proxmox_node_cpustat_cpu_percent{job=\"$job\"}",
+          "interval": "$resolution",
           "legendFormat": "{{node}}",
           "range": true,
           "refId": "usage"
@@ -1456,7 +1476,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${ds_prometheus}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1546,10 +1566,11 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
-          "expr": "proxmox_node_memory_memused_bytes{job=\"proxmox-ve\"} / proxmox_node_memory_memtotal_bytes{job=\"proxmox-ve\"}",
+          "expr": "proxmox_node_memory_memused_bytes{job=\"$job\"} / proxmox_node_memory_memtotal_bytes{job=\"$job\"}",
+          "interval": "$resolution",
           "legendFormat": "{{node}}",
           "range": true,
           "refId": "A"
@@ -1561,7 +1582,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${ds_prometheus}"
       },
       "description": "Incoming and outgoing network traffic by host",
       "fieldConfig": {
@@ -1659,9 +1680,9 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "rate(proxmox_node_network_receive_bytes_total{job=\"proxmox-ve\", device=\"eno1\"}[$__rate_interval])",
+          "expr": "rate(proxmox_node_network_receive_bytes_total{job=\"$job\", device=\"eno1\"}[$__rate_interval])",
           "instant": false,
-          "interval": "",
+          "interval": "$resolution",
           "legendFormat": "{{node}} - Receive",
           "range": true,
           "refId": "A"
@@ -1673,9 +1694,9 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "rate(proxmox_node_network_transmit_bytes_total{job=\"proxmox-ve\", device=\"eno1\"}[$__rate_interval])",
+          "expr": "rate(proxmox_node_network_transmit_bytes_total{job=\"$job\", device=\"eno1\"}[$__rate_interval])",
           "instant": false,
-          "interval": "",
+          "interval": "$resolution",
           "legendFormat": "{{node}} - Transmit",
           "range": true,
           "refId": "B"
@@ -1687,7 +1708,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${ds_prometheus}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1788,14 +1809,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "proxmox_storage_used_bytes{job=\"proxmox-ve\"} / proxmox_storage_total_bytes{job=\"proxmox-ve\"}",
+          "expr": "proxmox_storage_used_bytes{job=\"$job\"} / proxmox_storage_total_bytes{job=\"$job\"}",
           "format": "time_series",
           "instant": false,
-          "interval": "",
+          "interval": "$resolution",
           "intervalFactor": 1,
           "legendFormat": "{{node}} - {{storage}}",
           "range": true,
@@ -1808,7 +1829,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${ds_prometheus}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2122,14 +2143,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(vmid, node, name, type) (proxmox_vm_uptime_seconds{job=\"proxmox-ve\"})",
+          "expr": "sum by(vmid, node, name, type) (proxmox_vm_uptime_seconds{job=\"$job\"})",
           "format": "table",
           "instant": true,
-          "interval": "",
+          "interval": "$resolution",
           "legendFormat": "",
           "range": false,
           "refId": "id, name and type"
@@ -2137,13 +2158,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(vmid) (proxmox_vm_uptime_seconds{job=\"proxmox-ve\"} > bool 0)",
+          "expr": "sum by(vmid) (proxmox_vm_uptime_seconds{job=\"$job\"} > bool 0)",
           "format": "table",
           "instant": true,
+          "interval": "$resolution",
           "legendFormat": "",
           "range": false,
           "refId": "status"
@@ -2151,13 +2173,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(vmid) (proxmox_vm_cpus_ratio{job=\"proxmox-ve\"})",
+          "expr": "sum by(vmid) (proxmox_vm_cpus_ratio{job=\"$job\"})",
           "format": "table",
           "instant": true,
+          "interval": "$resolution",
           "legendFormat": "",
           "range": false,
           "refId": "vcpus"
@@ -2165,13 +2188,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(vmid) (proxmox_vm_maxmem_bytes{job=\"proxmox-ve\"})",
+          "expr": "sum by(vmid) (proxmox_vm_maxmem_bytes{job=\"$job\"})",
           "format": "table",
           "instant": true,
+          "interval": "$resolution",
           "legendFormat": "",
           "range": false,
           "refId": "memsize"
@@ -2179,13 +2203,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(vmid) (proxmox_vm_mem_bytes{job=\"proxmox-ve\"} / proxmox_vm_maxmem_bytes{job=\"proxmox-ve\"} and proxmox_vm_uptime_seconds > 0)",
+          "expr": "sum by(vmid) (proxmox_vm_mem_bytes{job=\"$job\"} / proxmox_vm_maxmem_bytes{job=\"$job\"} and proxmox_vm_uptime_seconds > 0)",
           "format": "table",
           "instant": true,
+          "interval": "$resolution",
           "legendFormat": "",
           "range": false,
           "refId": "memusg_percent"
@@ -2193,13 +2218,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(vmid) (proxmox_vm_maxdisk_bytes{job=\"proxmox-ve\"})",
+          "expr": "sum by(vmid) (proxmox_vm_maxdisk_bytes{job=\"$job\"})",
           "format": "table",
           "instant": true,
+          "interval": "$resolution",
           "legendFormat": "",
           "range": false,
           "refId": "disksize"
@@ -2207,13 +2233,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(vmid) (proxmox_vm_disk_bytes{job=\"proxmox-ve\", type=\"lxc\"} / proxmox_vm_maxdisk_bytes{job=\"proxmox-ve\", type=\"lxc\"})",
+          "expr": "sum by(vmid) (proxmox_vm_disk_bytes{job=\"$job\", type=\"lxc\"} / proxmox_vm_maxdisk_bytes{job=\"$job\", type=\"lxc\"})",
           "format": "table",
           "instant": true,
+          "interval": "$resolution",
           "legendFormat": "",
           "range": false,
           "refId": "diskusg_percent"
@@ -2282,7 +2309,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${ds_prometheus}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2370,12 +2397,12 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
-          "expr": "proxmox_vm_pressurecpusome_percent{job=\"proxmox-ve\"} and proxmox_vm_uptime_seconds > 0",
+          "expr": "proxmox_vm_pressurecpusome_percent{job=\"$job\"} and proxmox_vm_uptime_seconds > 0",
           "format": "time_series",
-          "interval": "",
+          "interval": "$resolution",
           "intervalFactor": 4,
           "legendFormat": "{{node}} - {{name}} CPU ({{type}})",
           "range": true,
@@ -2384,12 +2411,12 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
-          "expr": "proxmox_vm_pressurememorysome_bytes{job=\"proxmox-ve\"} and proxmox_vm_uptime_seconds > 0",
+          "expr": "proxmox_vm_pressurememorysome_bytes{job=\"$job\"} and proxmox_vm_uptime_seconds > 0",
           "format": "time_series",
-          "interval": "",
+          "interval": "$resolution",
           "intervalFactor": 4,
           "legendFormat": "{{node}} - {{name}} Mem ({{type}})",
           "range": true,
@@ -2398,12 +2425,12 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
-          "expr": "proxmox_vm_pressureiosome_ratio{job=\"proxmox-ve\"} and proxmox_vm_uptime_seconds > 0",
+          "expr": "proxmox_vm_pressureiosome_ratio{job=\"$job\"} and proxmox_vm_uptime_seconds > 0",
           "format": "time_series",
-          "interval": "",
+          "interval": "$resolution",
           "intervalFactor": 4,
           "legendFormat": "{{node}} - {{name}} I/O ({{type}})",
           "range": true,
@@ -2416,7 +2443,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${ds_prometheus}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2504,12 +2531,12 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
-          "expr": "proxmox_vm_cpu_percent{job=\"proxmox-ve\"} and proxmox_vm_uptime_seconds > 0",
+          "expr": "proxmox_vm_cpu_percent{job=\"$job\"} and proxmox_vm_uptime_seconds > 0",
           "format": "time_series",
-          "interval": "",
+          "interval": "$resolution",
           "intervalFactor": 4,
           "legendFormat": "{{node}} - {{name}} ({{type}})",
           "range": true,
@@ -2522,7 +2549,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${ds_prometheus}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2610,12 +2637,12 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
-          "expr": "proxmox_vm_mem_bytes{job=\"proxmox-ve\"} / proxmox_vm_maxmem_bytes{job=\"proxmox-ve\"} and proxmox_vm_uptime_seconds > 0",
+          "expr": "proxmox_vm_mem_bytes{job=\"$job\"} / proxmox_vm_maxmem_bytes{job=\"$job\"} and proxmox_vm_uptime_seconds > 0",
           "format": "time_series",
-          "interval": "",
+          "interval": "$resolution",
           "intervalFactor": 4,
           "legendFormat": "{{node}} - {{name}} ({{type}})",
           "range": true,
@@ -2628,7 +2655,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${ds_prometheus}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2727,12 +2754,12 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
-          "expr": "rate(proxmox_vm_netin_bytes_total{job=\"proxmox-ve\"}[5m]) and proxmox_vm_uptime_seconds > 0",
+          "expr": "rate(proxmox_vm_netin_bytes_total{job=\"$job\"}[$__rate_interval]) and proxmox_vm_uptime_seconds > 0",
           "format": "time_series",
-          "interval": "",
+          "interval": "$resolution",
           "intervalFactor": 3,
           "legendFormat": "{{node}} - {{name}} RECV ({{type}})",
           "range": true,
@@ -2741,12 +2768,12 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
-          "expr": "rate(proxmox_vm_netout_bytes_total{job=\"proxmox-ve\"}[5m]) and proxmox_vm_uptime_seconds > 0",
+          "expr": "rate(proxmox_vm_netout_bytes_total{job=\"$job\"}[$__rate_interval]) and proxmox_vm_uptime_seconds > 0",
           "format": "time_series",
-          "interval": "",
+          "interval": "$resolution",
           "intervalFactor": 3,
           "legendFormat": "{{node}} - {{name}} SEND ({{type}})",
           "range": true,
@@ -2759,7 +2786,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${ds_prometheus}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2858,12 +2885,12 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
-          "expr": "rate(proxmox_vm_diskread_bytes_total{job=\"proxmox-ve\"}[5m]) and proxmox_vm_uptime_seconds > 0",
+          "expr": "rate(proxmox_vm_diskread_bytes_total{job=\"$job\"}[$__rate_interval]) and proxmox_vm_uptime_seconds > 0",
           "format": "time_series",
-          "interval": "",
+          "interval": "$resolution",
           "intervalFactor": 2,
           "legendFormat": "{{node}} - {{name}} Read ({{type}})",
           "range": true,
@@ -2872,12 +2899,12 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
-          "expr": "rate(proxmox_vm_diskwrite_bytes_total{job=\"proxmox-ve\"}[5m]) and proxmox_vm_uptime_seconds > 0",
+          "expr": "rate(proxmox_vm_diskwrite_bytes_total{job=\"$job\"}[$__rate_interval]) and proxmox_vm_uptime_seconds > 0",
           "format": "time_series",
-          "interval": "",
+          "interval": "$resolution",
           "intervalFactor": 2,
           "legendFormat": "{{node}} - {{name}} Write ({{type}})",
           "range": true,
@@ -2890,7 +2917,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${ds_prometheus}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2982,12 +3009,12 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${ds_prometheus}"
           },
           "editorMode": "code",
-          "expr": "proxmox_vm_disk_bytes{job=\"proxmox-ve\", type=\"lxc\"} / proxmox_vm_maxdisk_bytes{job=\"proxmox-ve\", type=\"lxc\"}",
+          "expr": "proxmox_vm_disk_bytes{job=\"$job\", type=\"lxc\"} / proxmox_vm_maxdisk_bytes{job=\"$job\", type=\"lxc\"}",
           "format": "time_series",
-          "interval": "",
+          "interval": "$resolution",
           "intervalFactor": 1,
           "legendFormat": "{{node}} - {{name}} ({{type}})",
           "range": true,
@@ -3020,21 +3047,22 @@
       },
       {
         "current": {
-          "text": "bare_metal/unix",
-          "value": "bare_metal/unix"
+          "text": "proxmox-ve",
+          "value": "proxmox-ve"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "${ds_prometheus}"
         },
-        "definition": "",
+        "definition": "label_values(proxmox_node_uptime_seconds,job)",
         "includeAll": false,
         "label": "Job",
         "name": "job",
         "options": [],
         "query": {
-          "query": "label_values(node_uname_info, job)",
-          "refId": "Prometheus-job-Variable-Query"
+          "qryType": 1,
+          "query": "label_values(proxmox_node_uptime_seconds,job)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
         "regex": "",
