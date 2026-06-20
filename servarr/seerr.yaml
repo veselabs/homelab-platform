@@ -28,16 +28,33 @@ spec:
             - name: http
               containerPort: 5055
           volumeMounts:
-            - name: data
-              mountPath: /data
+            - name: seerr-config
+              mountPath: /app/config
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
         runAsGroup: 1000
+        fsGroup: 1000
       volumes:
-        - name: data
+        - name: seerr-config
           persistentVolumeClaim:
-            claimName: servarr-data
+            claimName: seerr-config
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: seerr-config
+  labels:
+    app.kubernetes.io/name: servarr
+    app.kubernetes.io/instance: servarr
+    app.kubernetes.io/component: seerr
+spec:
+  storageClassName: longhorn-slow-single
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
 ---
 apiVersion: v1
 kind: Service
