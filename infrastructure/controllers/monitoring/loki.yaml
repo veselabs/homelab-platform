@@ -83,3 +83,9 @@ spec:
       serviceAccount:
         # Both Mimir and Loki charts use `minio-sa` by default
         name: loki-minio-sa
+      image:
+        repository: pgsty/silo
+        tag: RELEASE.2026-10-18T00-00-00Z
+      mcImage:
+        repository: pgsty/mc
+        tag: RELEASE.2026-10-18T00-00-00Z
